@@ -37,6 +37,7 @@ int main(int argc, char *argv[])
 
     int cont = 1;
     while (cont) {
+    ogs_handle_input(screen);
     poresit input a reakce na nej...
     cont = ogs_was_quited(screen);
     ogs_redraw(screen);
