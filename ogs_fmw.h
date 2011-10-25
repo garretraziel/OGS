@@ -11,7 +11,7 @@
 
 OGS_SCREEN ogs_init(int mode, OGS_RES resolution, int colors);
 
-int ogs_create_window(OGS_SCREEN screen, OGS_RES position, OGS_RES size, int type);
+OGS_PWINDOW_S ogs_create_window(int x1, int y1, int x2, int y2, int pos_type);
 
 int ogs_add_window(OGS_PWINDOW_S window, OGS_SCREEN screen);
 
