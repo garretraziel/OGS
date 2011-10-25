@@ -27,5 +27,21 @@ int main(int argc, char *argv[])
   OGS_SCREEN screen = ogs_init(mode, resolution, colors);
 
   fgetc(stdin);
+
+  // code:
+  /*
+    OGS_PWINDOW_S window = ogs_create_window(x, y, x2, y2, OGS_REL);
+    ogs_add_button_to_window(window, x, y, x2, y2, "Hello, world", pozdrav, 1);
+    ogs_add_picture_to_window(window, x, y, x2, y2, "picture.png");
+    ogs_add_window(window, screen);
+
+    int cont = 1;
+    while (cont) {
+    poresit input a reakce na nej...
+    cont = ogs_was_quited(screen);
+    ogs_redraw(screen);
+    }
+  */
+  
   return 0;
 }

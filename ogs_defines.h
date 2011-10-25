@@ -38,7 +38,6 @@ typedef struct {
 
 typedef struct OGS_LIST_ITEM {
   int type; // type of item from OGS_OBJECTS
-  OGS_RES position; // position of this object
   void *item; // pointer to struct of this object
   struct OGS_LIST_ITEM *next; // next object in list
 } *OGS_LIST_PITEM; // abstract one item of list
