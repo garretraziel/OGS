@@ -91,6 +91,7 @@ typedef struct OGS_PICTURE_S {
 
 typedef struct {
   SDL_Surface *screen; // SDL surface
+  OGS_RES resolution; // resolution of screen
   OGS_LIST_PITEM items; // list of items on this screen
   OGS_LIST_PITEM top; // top of list
   OGS_LIST_PITEM bot; // bottom of list
