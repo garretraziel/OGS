@@ -32,6 +32,21 @@ typedef struct OGS_LIST_ITEM {
   struct OGS_LIST_ITEM *next;
 } *OGS_LIST_PITEM;
 
+typedef struct OGS_WINDOW_S {
+  OGS_RES position;
+  OGS_RES size;
+  int pos_type;
+  OGS_LIST_PITEM items;
+  //...
+} *OGS_PWINDOW_S;
+
+typedef struct OGS_BUTTON_S {
+  OGS_RES position;
+  OGS_RES size;
+  OGS_RES caption;
+  void *function_execute;
+} *OGS_PBUTTON_S;
+
 typedef struct {
   SDL_Surface *screen;
   OGS_LIST_PITEM items;

@@ -20,8 +20,8 @@ int main(int argc, char *argv[])
 {
   int mode = OGS_WINDOWED;
   OGS_RES resolution;
-  resolution.width = 1024;
-  resolution.height = 768;
+  resolution.width = 800;
+  resolution.height = 600;
   int colors = 16;
   
   OGS_SCREEN screen = ogs_init(mode, resolution, colors);
