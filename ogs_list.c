@@ -11,7 +11,10 @@ int ogs_list_destroy(OGS_LIST_PITEM item)
     OGS_LIST_PITEM temp = item;
     item = item -> next;
 
-    
+    if (ogs_delete_object(temp -> item, temp -> type) != 0) {
+      fprintf(stderr, "Error while deleting.\n");
+      // nothing more...
+    }
     
     free(temp);
   }

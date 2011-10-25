@@ -2,7 +2,6 @@
 #define __OGS_DEFINES_H__
 
 #include <SDL/SDL.h>
-#include <SDL/SDL_gfxPrimitives.h>
 
 enum {
   OGS_FULLSCREEN, OGS_WINDOWED,

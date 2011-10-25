@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include "ogs_defines.h"
+#include "ogs_objects.h"
 
 int ogs_list_init();
 
