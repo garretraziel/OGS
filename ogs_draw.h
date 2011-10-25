@@ -6,4 +6,6 @@
 #include <SDL/SDL_gfxPrimitives.h>
 #include "ogs_defines.h"
 
+int ogs_draw_element(void *element, OGS_RES position, int type);
+
 #endif
