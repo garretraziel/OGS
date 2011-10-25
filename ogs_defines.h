@@ -6,53 +6,96 @@
 
 enum {
   OGS_FULLSCREEN, OGS_WINDOWED,
-} OGS_WIN_MODES;
+} OGS_WIN_MODES; // modes of window - fullscreen or windowed
 
 enum {
   OGS_ABS, OGS_REL,
-} OGS_CONTROL_MODE;
+} OGS_POSITION_MODE; // modes of position - absolute or relative to size
+
+enum {
+  OGS_BMP, OGS_PNG, OGS_JPEG,
+} OGS_PICTURE_TYPE; // types of picture - bmp, png or jpeg
+
+enum {
+  OGS_OK, // everything went better than expected
+  OGS_INIT_ERROR, // error while init of OGS
+  OGS_NOMEM_ERROR, // not enought memory error
+  OGS_SDL_ERROR, // error with SDL
+} OGS_ERRORS; // types of error from program
+
+enum {
+  OGS_WINDOW, // window object
+  OGS_BUTTON, // button object
+  OGS_INPUTF, // input field object
+  OGS_INFO, // info message object
+  OGS_TEXTARRAY, // text object
+  OGS_PICTURE, // picture object
+} OGS_OBJECTS; // objects usable on screen
 
 typedef struct {
   int width;
   int height;
-} OGS_RES;
-
-enum {
-  OGS_OK, OGS_INIT_ERROR, OGS_NOMEM_ERROR, OGS_SDL_ERROR,
-} OGS_ERRORS;
-
-enum {
-  OGS_WINDOW, OGS_BUTTON, OGS_INPUTF, OGS_INFO, OGS_TEXTARRAY, OGS_PICTURE,
-} OGS_OBJECTS;
+} OGS_RES; // structure for x and y coordinates
 
 typedef struct OGS_LIST_ITEM {
-  int type;
-  OGS_RES position;
-  void *item;
-  struct OGS_LIST_ITEM *next;
-} *OGS_LIST_PITEM;
+  int type; // type of item from OGS_OBJECTS
+  OGS_RES position; // position of this object
+  void *item; // pointer to struct of this object
+  struct OGS_LIST_ITEM *next; // next object in list
+} *OGS_LIST_PITEM; // abstract one item of list
 
 typedef struct OGS_WINDOW_S {
-  OGS_RES position;
-  OGS_RES size;
-  int pos_type;
-  OGS_LIST_PITEM items;
+  OGS_RES position; // position of window
+  OGS_RES size; // size of window
+  int pos_type; // position type inside window (ABS or REL)
+  OGS_LIST_PITEM items; // list of intems in this window
   //...
-} *OGS_PWINDOW_S;
+} *OGS_PWINDOW_S; // object of main window
 
 typedef struct OGS_BUTTON_S {
-  OGS_RES position;
-  OGS_RES size;
-  OGS_RES caption;
-  void *function_execute;
-} *OGS_PBUTTON_S;
+  OGS_RES position; // position of button
+  OGS_RES size; // size of button
+  char *caption; // what is written on that button
+  void *function_execute; // pointer to function that must be executed while is button clicked
+  int enabled; // if is button enabled
+} *OGS_PBUTTON_S; // object of button
+
+typedef struct OGS_INPUTF_S {
+  OGS_RES position; // position of input field
+  char *text; // text in input field
+  int size; // size of text
+  int font; // font of text
+  int enabled; // is inputfield enabled
+} *OGS_PINPUTF_S; // object of input field
+
+typedef struct OGS_INFO_S {
+  OGS_RES position; // position of info message
+  OGS_RES size; // size of info message
+  char *text; // text in info message
+  int covers_all; // if info message covers whole screen
+  int text_size; // size of text
+  int font; // font used for text
+} *OGS_PINFO_S; // object of info message
+
+typedef struct OGS_TEXTARRAY_S {
+  OGS_RES position; // position of text array
+  char *text; // text in text array
+  int size; // size of text
+  int font; // font of text
+} *OGS_PTEXTARRAY_S; // object of text array
+
+typedef struct OGS_PICTURE_S {
+  OGS_RES position; // position of picture
+  OGS_RES size; // size of picture
+  int type; // type of picture (BMP, JPEG, PNG...)
+} *OGS_PPICTURE_S; // object of picture
 
 typedef struct {
-  SDL_Surface *screen;
-  OGS_LIST_PITEM items;
-  OGS_LIST_PITEM top;
-  OGS_LIST_PITEM bot;
-  OGS_LIST_PITEM act;
-} OGS_SCREEN;
+  SDL_Surface *screen; // SDL surface
+  OGS_LIST_PITEM items; // list of items on this screen
+  OGS_LIST_PITEM top; // top of list
+  OGS_LIST_PITEM bot; // bottom of list
+  OGS_LIST_PITEM act; // actual item in list
+} OGS_SCREEN; // object representing whole screen
 
 #endif
