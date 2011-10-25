@@ -10,6 +10,9 @@
 #include "ogs_objects.h"
 
 OGS_SCREEN ogs_init(int mode, OGS_RES resolution, int colors);
+
 int ogs_create_window(OGS_SCREEN screen, OGS_RES position, OGS_RES size, int type);
+
+int ogs_add_window(OGS_PWINDOW_S window, OGS_SCREEN screen);
 
 #endif

@@ -54,3 +54,8 @@ int ogs_create_window(OGS_SCREEN screen, OGS_RES position, OGS_RES size, int typ
 {
   return OGS_OK;
 }
+
+int ogs_add_window(OGS_PWINDOW_S window, OGS_SCREEN screen)
+{
+  return 0;
+}
