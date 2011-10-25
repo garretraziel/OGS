@@ -6,4 +6,6 @@
 
 int ogs_list_init();
 
+int ogs_list_destroy(OGS_LIST_PITEM item);
+
 #endif

@@ -1,6 +1,6 @@
 NAME=ogs
-HEADERS=defines.h ogs_fmw.h ogs_window.h ogs_defines.h
-OBJFILES=ogs_menu.o ogs_fmw.o ogs_window.o
+HEADERS=defines.h ogs_fmw.h ogs_window.h ogs_defines.h ogs_list.h ogs_objects.h
+OBJFILES=ogs_menu.o ogs_fmw.o ogs_window.o ogs_list.o ogs_objects.o
 
 FLAGS=-std=c99 -Wall -Wextra -pedantic
 LIBS=-lSDL -lSDL_gfx
@@ -21,6 +21,12 @@ ogs_fmw.o:ogs_fmw.c
 
 ogs_window.o:ogs_window.c
 	gcc $(FLAGS) ogs_window.c -c
+
+ogs_list.o:ogs_list.c
+	gcc $(FLAGS) ogs_list.c -c
+
+ogs_objects.o:ogs_objects.c
+	gcc $(FLAGS) ogs_objects.c -c
 
 clean:
 	rm -f $(NAME) $(OBJFILES)
