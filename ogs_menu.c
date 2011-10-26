@@ -42,6 +42,8 @@ int main(int argc, char *argv[])
     cont = ogs_was_quited(screen);
     ogs_redraw(screen);
     }
+
+    ogs_delete_screen(screen);
   */
   
   return 0;
