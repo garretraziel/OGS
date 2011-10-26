@@ -7,9 +7,9 @@ DFLAGS=-std=c99 -Wall -Wextra -pedantic -g
 LIBS=-lSDL -lSDL_gfx
 CC=gcc
 
+Release:all
 Debug:CFLAGS += -g
 Debug:all
-Release:all
 build:$(NAME)
 all:$(NAME)
 
