@@ -26,8 +26,6 @@ int main(int argc, char *argv[])
   
   OGS_SCREEN screen = ogs_init(mode, resolution, colors);
 
-  fgetc(stdin);
-
   // code:
   /*
     OGS_PWINDOW_S window = ogs_create_window(x, y, x2, y2, OGS_REL);
@@ -45,6 +43,8 @@ int main(int argc, char *argv[])
 
     ogs_delete_screen(screen);
   */
+
+  fgetc(stdin);
   
   return 0;
 }
