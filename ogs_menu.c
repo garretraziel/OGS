@@ -18,7 +18,7 @@ typedef struct {
 
 int main(int argc, char *argv[])
 {
-  int mode = OGS_WINDOWED;
+  int mode = OGS_WINDOWED; // should be fullscreen
   OGS_RES resolution;
   resolution.width = 800;
   resolution.height = 600;
