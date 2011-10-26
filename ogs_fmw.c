@@ -50,7 +50,7 @@ OGS_SCREEN ogs_init(int mode, OGS_RES resolution, int colors)
   return oscreen;
 }
 
-OGS_PWINDOW_S ogs_create_window(int x1, int y1, int x2, int y2, int pos_type);
+OGS_PWINDOW_S ogs_create_window(int x1, int y1, int x2, int y2, int pos_type)
 {
   return NULL;
 }
