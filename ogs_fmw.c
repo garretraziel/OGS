@@ -37,6 +37,7 @@ OGS_SCREEN ogs_init(int mode, OGS_RES resolution, int colors)
   OGS_SCREEN oscreen;
   
   if (ogs_i_init_sdl(mode, resolution, colors) != OGS_OK) {
+    // not good arguments
     oscreen.screen = NULL;
     return oscreen;
   }
