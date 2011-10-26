@@ -1,10 +1,10 @@
 #include "ogs_fmw.h"
 
-int ogs_init_sdl(int mode, OGS_RES resolution, int colors);
+int ogs_i_init_sdl(int mode, OGS_RES resolution, int colors);
 
 int ogs_i_resc_is_sane(int mode, OGS_RES resolution, int colors);
 
-int ogs_init_sdl(int mode, OGS_RES resolution, int colors)
+int ogs_i_init_sdl(int mode, OGS_RES resolution, int colors)
 {
   if (!ogs_i_resc_is_sane(mode,resolution,colors)) {
     fprintf(stderr,"Unable to initialize, insane arguments.\n");
@@ -36,7 +36,7 @@ OGS_SCREEN ogs_init(int mode, OGS_RES resolution, int colors)
 {
   OGS_SCREEN oscreen;
   
-  if (ogs_init_sdl(mode, resolution, colors) != OGS_OK) {
+  if (ogs_i_init_sdl(mode, resolution, colors) != OGS_OK) {
     oscreen.screen = NULL;
     return oscreen;
   }
