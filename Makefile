@@ -2,31 +2,21 @@ NAME=ogs
 HEADERS=defines.h ogs_fmw.h ogs_defines.h ogs_list.h ogs_objects.h ogs_draw.h
 OBJFILES=ogs_menu.o ogs_fmw.o ogs_list.o ogs_objects.o ogs_draw.o
 
-FLAGS=-std=c99 -Wall -Wextra -pedantic
+CFLAGS=-std=c99 -Wall -Wextra -pedantic
+DFLAGS=-std=c99 -Wall -Wextra -pedantic -g
 LIBS=-lSDL -lSDL_gfx
+CC=llvm-clang
 
+Debug:CFLAGS = $(DFLAGS)
+Debug:all
+Release:all
 build:$(NAME)
 all:$(NAME)
 
 $(NAME):$(OBJFILES)
-	gcc $(FLAGS) $(OBJFILES) $(LIBS) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJFILES) $(LIBS) -o $(NAME)
 
 $(OBJFILES):$(HEADERS)
-
-ogs_menu.o:ogs_menu.c
-	gcc $(FLAGS) ogs_menu.c -c
-
-ogs_fmw.o:ogs_fmw.c
-	gcc $(FLAGS) ogs_fmw.c -c
-
-ogs_list.o:ogs_list.c
-	gcc $(FLAGS) ogs_list.c -c
-
-ogs_objects.o:ogs_objects.c
-	gcc $(FLAGS) ogs_objects.c -c
-
-ogs_draw.o:ogs_draw.c
-	gcc $(FLAGS) ogs_draw.c -c
 
 clean:
 	rm -f $(NAME) $(OBJFILES)
