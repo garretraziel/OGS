@@ -1,3 +1,5 @@
+// main file with main function
+
 #include <stdio.h>
 #include <stdlib.h>
 
