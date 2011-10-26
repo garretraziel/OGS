@@ -5,7 +5,7 @@ OBJFILES=ogs_menu.o ogs_fmw.o ogs_list.o ogs_objects.o ogs_draw.o
 CFLAGS=-std=c99 -Wall -Wextra -pedantic
 DFLAGS=-std=c99 -Wall -Wextra -pedantic -g
 LIBS=-lSDL -lSDL_gfx
-CC=llvm-clang
+CC=gcc
 
 Debug:CFLAGS += -g
 Debug:all
