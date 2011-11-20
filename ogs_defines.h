@@ -94,10 +94,10 @@ typedef struct OGS_PICTURE_S {
     int type; // type of picture (BMP, JPEG, PNG...)
 } *OGS_PPICTURE_S; // object of picture
 
-typedef struct {
+typedef struct OGS_SCREEN{
     SDL_Surface *screen; // SDL surface
     OGS_RES resolution; // resolution of screen
     OGS_PLIST list; // list of windows
-} OGS_SCREEN; // object representing whole screen
+} *OGS_PSCREEN; // object representing whole screen
 
 #endif

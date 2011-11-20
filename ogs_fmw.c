@@ -32,22 +32,26 @@ int ogs_i_resc_is_sane(int mode, OGS_RES resolution, int colors)
     return 1;
 }
 
-OGS_SCREEN ogs_init(int mode, OGS_RES resolution, int colors)
+OGS_PSCREEN ogs_init(int mode, OGS_RES resolution, int colors)
 {
-    OGS_SCREEN oscreen;
+    OGS_PSCREEN oscreen = malloc(sizeof(struct OGS_SCREEN));
+
+    if (oscreen == NULL) {
+	return NULL;
+    }
     
     if (ogs_i_init_sdl(mode, resolution, colors) != OGS_OK) {
 	// not good arguments
-	oscreen.screen = NULL;
+	oscreen -> screen = NULL;
 	return oscreen;
     }
     
     int type = mode == OGS_FULLSCREEN? SDL_FULLSCREEN : SDL_HWSURFACE;
     
-    oscreen.screen = SDL_SetVideoMode(resolution.width, resolution.height, colors, type | SDL_DOUBLEBUF);
+    oscreen -> screen = SDL_SetVideoMode(resolution.width, resolution.height, colors, type | SDL_DOUBLEBUF);
     
-    oscreen.list = malloc(sizeof(struct OGS_LIST));
-    ogs_list_init(oscreen.list);
+    oscreen -> list = malloc(sizeof(struct OGS_LIST));
+    ogs_list_init(oscreen -> list);
     
     return oscreen;
 }
@@ -57,8 +61,13 @@ OGS_PWINDOW_S ogs_create_window(int x1, int y1, int x2, int y2, int pos_type)
     return NULL;
 }
 
-int ogs_add_window(OGS_PWINDOW_S window, OGS_SCREEN screen)
+int ogs_add_window(OGS_PWINDOW_S window, OGS_PSCREEN screen)
 {
+    if (ogs_list_add(screen -> list, OGS_WINDOW, (void *) window) != OGS_OK) {
+	return OGS_NOMEM_ERROR;
+    }
+
+    //TODO: neni tady potreba resit jeste neco?
     
     return OGS_OK;
 }

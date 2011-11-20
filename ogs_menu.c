@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
   resolution.height = 600;
   int colors = 16;
   
-  OGS_SCREEN screen = ogs_init(mode, resolution, colors);
+  OGS_PSCREEN screen = ogs_init(mode, resolution, colors);
 
   // code:
   /*

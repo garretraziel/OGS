@@ -21,6 +21,8 @@ int ogs_list_add(OGS_PLIST list, int type, void *item)
 
     if (list -> top == NULL) list -> top = list -> bot = temp;
     else list -> bot = temp;
+
+    return OGS_OK;
 }
 
 int ogs_list_destroy(OGS_PLIST list)
