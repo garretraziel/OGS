@@ -9,7 +9,7 @@
 #include "ogs_list.h"
 #include "ogs_objects.h"
 
-OGS_PSCREEN ogs_init(int mode, OGS_RES resolution, int colors);
+OGS_PSCREEN ogs_init(int mode, int width, int height, int colors);
 
 OGS_PWINDOW_S ogs_create_window(int x1, int y1, int x2, int y2, int pos_type);
 

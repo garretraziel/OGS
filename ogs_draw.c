@@ -12,7 +12,7 @@ int ogs_i_draw_textarray(OGS_PTEXTARRAY_S textarray, OGS_PSCREEN screen);
 
 int ogs_i_draw_picture(OGS_PPICTURE_S picture, OGS_PSCREEN screen);
 
-int ogs_draw_element(void *element, int type, OGS_PSCREEN screen)
+int ogs_draw_element(OGS_PSCREEN screen, int type, void *element)
 {
     switch(type) {
     case OGS_WINDOW: {
@@ -62,12 +62,18 @@ int ogs_i_draw_window(OGS_PWINDOW_S window, OGS_PSCREEN screen)
 
 int ogs_i_draw_button(OGS_PBUTTON_S button, OGS_PSCREEN screen)
 {
+    roundedBoxColor(screen -> screen, button->position.width-3, button->position.height-3, \
+		    button -> position.width + button -> size.width + 3, \
+		    button -> position.height + button -> size.height + 3, 2, 0xffffff55);
     if (button -> enabled) {
-	boxColor(screen -> screen, button->position.width, button->position.height, \
-		       button -> position.width + button -> size.width,\
-		       button -> position.height + button -> size.height, WHITE);
-    } else {
+	roundedBoxColor(screen -> screen, button->position.width, button->position.height, \
+		 button -> position.width + button -> size.width,	\
+			button -> position.height + button -> size.height, 2, WHITE);
+	//TODO: jen pokus, udělat jinak
     }
+    stringColor(screen -> screen, button -> position.width + 10,	\
+		button -> position.height + button -> size.height/2,	\
+		button -> caption, 0x000000ff);
     SDL_UpdateRect(screen ->  screen, 0, 0, 0, 0);
     return 0;
 }

@@ -52,6 +52,7 @@ typedef struct OGS_WINDOW_S {
     OGS_RES position; // position of window
     OGS_RES size; // size of window
     int pos_type; // position type inside window (ABS or REL)
+    int fullscreen; // if is window covering whole screen
     OGS_PLIST items; // list of items in this window
     //...
 } *OGS_PWINDOW_S; // object of main window

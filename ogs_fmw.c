@@ -32,9 +32,10 @@ int ogs_i_resc_is_sane(int mode, OGS_RES resolution, int colors)
     return 1;
 }
 
-OGS_PSCREEN ogs_init(int mode, OGS_RES resolution, int colors)
+OGS_PSCREEN ogs_init(int mode, int width, int height, int colors)
 {
     OGS_PSCREEN oscreen = malloc(sizeof(struct OGS_SCREEN));
+    OGS_RES resolution = {.width = width, .height = height};
 
     if (oscreen == NULL) {
 	return NULL;
@@ -53,6 +54,19 @@ OGS_PSCREEN ogs_init(int mode, OGS_RES resolution, int colors)
     oscreen -> list = malloc(sizeof(struct OGS_LIST));
     if (oscreen == NULL) return NULL;
     ogs_list_init(oscreen -> list);
+
+    //TODELETE
+    OGS_PBUTTON_S button = malloc(sizeof(struct OGS_BUTTON_S));
+    button -> position.width = 50;
+    button -> position.height = 50;
+
+    button -> size.width = 150;
+    button -> size.height = 30;
+    button -> enabled = 1;
+    button -> caption = "Hello, world!";
+    ogs_list_add(oscreen -> list, OGS_BUTTON, (void*) button);
+    ogs_draw_element(oscreen, OGS_BUTTON, (void*) button);
+    //TODELETE
     
     return oscreen;
 }

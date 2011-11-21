@@ -6,6 +6,6 @@
 #include <SDL/SDL_gfxPrimitives.h>
 #include "ogs_defines.h"
 
-int ogs_draw_element(void *element, int type, OGS_PSCREEN screen);
+int ogs_draw_element(OGS_PSCREEN screen,  int type, void *element);
 
 #endif
