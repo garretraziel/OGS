@@ -52,7 +52,7 @@ typedef struct OGS_WINDOW_S {
     OGS_RES position; // position of window
     OGS_RES size; // size of window
     int pos_type; // position type inside window (ABS or REL)
-    OGS_PLIST items; // list of intems in this window
+    OGS_PLIST items; // list of items in this window
     //...
 } *OGS_PWINDOW_S; // object of main window
 
@@ -99,5 +99,16 @@ typedef struct OGS_SCREEN{
     OGS_RES resolution; // resolution of screen
     OGS_PLIST list; // list of windows
 } *OGS_PSCREEN; // object representing whole screen
+
+// COLORS:
+
+#define WHITE 0xffffffff
+#define RED 0xff0000ff
+#define BLACK 0x00000000
+#define YELLOW 0xffff00ff
+#define PURPLE 0xff00ffff
+#define BLUE 0x00ffffff
+#define GREEN 0x00ff00ff
+
 
 #endif

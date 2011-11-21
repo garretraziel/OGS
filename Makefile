@@ -3,7 +3,7 @@ HEADERS=defines.h ogs_fmw.h ogs_defines.h ogs_list.h ogs_objects.h ogs_draw.h
 OBJFILES=ogs_menu.o ogs_fmw.o ogs_list.o ogs_objects.o ogs_draw.o
 
 CFLAGS=-std=c99 -Wall -Wextra -pedantic
-DFLAGS=-std=c99 -Wall -Wextra -pedantic -g
+DFLAGS=-g
 LIBS=-lSDL -lSDL_gfx
 CC=gcc
 

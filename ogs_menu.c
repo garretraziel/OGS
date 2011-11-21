@@ -28,6 +28,8 @@ int main(int argc, char *argv[])
   
   OGS_PSCREEN screen = ogs_init(mode, resolution, colors);
 
+  
+
   // code:
   /*
     OGS_PWINDOW_S window = ogs_create_window(x, y, x2, y2, OGS_REL);

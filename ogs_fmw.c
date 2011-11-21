@@ -51,6 +51,7 @@ OGS_PSCREEN ogs_init(int mode, OGS_RES resolution, int colors)
     oscreen -> screen = SDL_SetVideoMode(resolution.width, resolution.height, colors, type | SDL_DOUBLEBUF);
     
     oscreen -> list = malloc(sizeof(struct OGS_LIST));
+    if (oscreen == NULL) return NULL;
     ogs_list_init(oscreen -> list);
     
     return oscreen;
