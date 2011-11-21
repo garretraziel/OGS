@@ -19,6 +19,13 @@ int ogs_draw_element(OGS_PSCREEN screen, int type, void *element)
     	// postarat se o vykresleni vsech vnitrnich prvku
     	OGS_PWINDOW_S window = (OGS_PWINDOW_S) element;
     	ogs_i_draw_window(window, screen);
+
+	OGS_LIST_PITEM item = window -> items -> top;
+	while (item != NULL) {
+	    ogs_draw_element(screen, item -> type, item -> item);
+	    item = item -> next;
+	}
+	
     	break;
     }
     case OGS_BUTTON: {
@@ -74,7 +81,7 @@ int ogs_i_draw_button(OGS_PBUTTON_S button, OGS_PSCREEN screen)
     stringColor(screen -> screen, button -> position.width + 10,	\
 		button -> position.height + button -> size.height/2,	\
 		button -> caption, 0x000000ff);
-    SDL_UpdateRect(screen ->  screen, 0, 0, 0, 0);
+    //SDL_UpdateRect(screen ->  screen, 0, 0, 0, 0);
     return 0;
 }
 
@@ -95,5 +102,19 @@ int ogs_i_draw_textarray(OGS_PTEXTARRAY_S textarray, OGS_PSCREEN screen)
 
 int ogs_i_draw_picture(OGS_PPICTURE_S picture, OGS_PSCREEN screen)
 {
+    return 0;
+}
+
+int ogs_redraw(OGS_PSCREEN screen)
+{
+    OGS_LIST_PITEM item = screen -> list -> top;
+
+    while (item != NULL) {
+	ogs_draw_element(screen, item -> type, item -> item);
+	item = item -> next;
+    }
+    
+    SDL_UpdateRect(screen -> screen, 0, 0, 0, 0);
+    
     return 0;
 }

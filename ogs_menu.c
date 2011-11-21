@@ -7,25 +7,25 @@
 #include "ogs_fmw.h"
 
 enum MODES {
-  PRINTHELP, NORMAL
+    PRINTHELP, NORMAL
 };
 
 typedef struct {
-  int mode;
-  int fullscreen;
-  int res_x;
-  int res_y;
-  //...
+    int mode;
+    int fullscreen;
+    int res_x;
+    int res_y;
+    //...
 } ARGS;
 
 int main(int argc, char *argv[])
 {
-  int mode = OGS_WINDOWED; // should be fullscreen
-  int width = 800;
-  int height = 600;
-  int colors = 16;
+    int mode = OGS_WINDOWED; // should be fullscreen
+    int width = 800;
+    int height = 600;
+    int colors = 16;
   
-  OGS_PSCREEN screen = ogs_init(mode, width, height, colors);
+    OGS_PSCREEN screen = ogs_init(mode, width, height, colors);
 
   
 
@@ -45,9 +45,11 @@ int main(int argc, char *argv[])
     }
   */
 
-  fgetc(stdin);
+    ogs_redraw(screen);
 
-  ogs_delete_screen(screen);
+    fgetc(stdin);
+
+    ogs_delete_screen(screen);
   
-  return 0;
+    return 0;
 }

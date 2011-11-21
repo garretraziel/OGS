@@ -8,4 +8,6 @@
 
 int ogs_draw_element(OGS_PSCREEN screen,  int type, void *element);
 
+int ogs_redraw(OGS_PSCREEN screen);
+
 #endif

@@ -62,7 +62,7 @@ OGS_PSCREEN ogs_init(int mode, int width, int height, int colors)
 
     button -> size.width = 150;
     button -> size.height = 30;
-    button -> enabled = 0;
+    button -> enabled = 1;
     button -> caption = "Hello, world!";
     ogs_list_add(oscreen -> list, OGS_BUTTON, (void*) button);
     ogs_draw_element(oscreen, OGS_BUTTON, (void*) button);
