@@ -4,7 +4,7 @@
 #include <stdlib.h>
 
 #include "defines.h"
-#include "ogs_fmw.h"
+#include "ogs/ogs_fmw.h"
 
 enum MODES {
     PRINTHELP, NORMAL
