@@ -41,13 +41,13 @@ int main(int argc, char *argv[])
     ogs_handle_input(screen);
     poresit input a reakce na nej...
     cont = ogs_was_quited(screen);
-    ogs_redraw(screen); // je potreba? nebudu flipovat po kazdym vykresleni? asi spis ne.
+    ogs_redraw(screen);
     }
-
-    ogs_delete_screen(screen);
   */
 
   fgetc(stdin);
+
+  ogs_delete_screen(screen);
   
   return 0;
 }

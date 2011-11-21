@@ -13,6 +13,8 @@ int ogs_list_add(OGS_PLIST list, int type, void *item)
 
     if (temp == NULL) return OGS_NOMEM_ERROR;
 
+    ogs_init_object(type, item);
+
     temp -> type = type;
     temp -> item = item;
     temp -> next = NULL;
@@ -30,14 +32,21 @@ int ogs_list_destroy(OGS_PLIST list)
     while (list -> top != NULL) {
 	OGS_LIST_PITEM temp = list -> top;
 	list -> top = list -> top -> next;
+
+	if (temp -> type == OGS_WINDOW) {
+	    ogs_list_destroy(((OGS_PWINDOW_S) temp -> item) -> items);
+	    //TODO: nemam toho mazat vic?
+	}
 	
-	if (ogs_delete_object(temp -> item, temp -> type) != 0) {
+	if (ogs_delete_object(temp -> type, temp -> item) != 0) {
 	    fprintf(stderr, "Error while deleting.\n");
 	    // nothing more...
 	}
 	
 	free(temp);
     }
+
+    free(list);
     
     return 0;
 }

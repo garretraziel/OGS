@@ -11,8 +11,10 @@
 
 OGS_PSCREEN ogs_init(int mode, int width, int height, int colors);
 
-OGS_PWINDOW_S ogs_create_window(int x1, int y1, int x2, int y2, int pos_type);
+OGS_PWINDOW_S ogs_create_window(int x1, int y1, int x2, int y2, int pos_type, int fulscreen);
 
 int ogs_add_window(OGS_PWINDOW_S window, OGS_PSCREEN screen);
+
+int ogs_delete_screen(OGS_PSCREEN screen);
 
 #endif

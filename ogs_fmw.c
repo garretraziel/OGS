@@ -62,7 +62,7 @@ OGS_PSCREEN ogs_init(int mode, int width, int height, int colors)
 
     button -> size.width = 150;
     button -> size.height = 30;
-    button -> enabled = 1;
+    button -> enabled = 0;
     button -> caption = "Hello, world!";
     ogs_list_add(oscreen -> list, OGS_BUTTON, (void*) button);
     ogs_draw_element(oscreen, OGS_BUTTON, (void*) button);
@@ -71,9 +71,25 @@ OGS_PSCREEN ogs_init(int mode, int width, int height, int colors)
     return oscreen;
 }
 
-OGS_PWINDOW_S ogs_create_window(int x1, int y1, int x2, int y2, int pos_type)
+OGS_PWINDOW_S ogs_create_window(int x1, int y1, int x2, int y2, int pos_type, int fullscreen)
 {
-    return NULL;
+    OGS_PWINDOW_S window = malloc(sizeof(struct OGS_WINDOW_S));
+    
+    if (window == NULL) {
+	fprintf(stderr,"Error: not enough memory.\n");
+	return NULL;
+    }
+    
+    window -> position.width = x1;
+    window -> position.height = y1;
+    window -> size.width = x2 - x1; //TODO: toto nejde lip?
+    window -> size.height = y2 - y1;
+    window -> pos_type = pos_type;
+    window -> fullscreen = fullscreen;
+
+    ogs_list_init(window -> items);
+    
+    return window;
 }
 
 int ogs_add_window(OGS_PWINDOW_S window, OGS_PSCREEN screen)
@@ -83,6 +99,17 @@ int ogs_add_window(OGS_PWINDOW_S window, OGS_PSCREEN screen)
     }
 
     //TODO: neni tady potreba resit jeste neco?
+    
+    return OGS_OK;
+}
+
+int ogs_delete_screen(OGS_PSCREEN screen)
+{
+    ogs_list_destroy(screen -> list);
+
+    free(screen);
+
+    //TODO:...
     
     return OGS_OK;
 }
