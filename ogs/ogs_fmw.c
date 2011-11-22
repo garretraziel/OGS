@@ -101,6 +101,14 @@ OGS_PWINDOW_S ogs_create_window(int x1, int y1, int x2, int y2, int pos_type, in
     window -> pos_type = pos_type;
     window -> fullscreen = fullscreen;
 
+    window -> items = malloc(sizeof(struct OGS_LIST));
+
+    if (window -> items == NULL) {
+	fprintf(stderr, "Error: not enough memory.\n");
+	free(window);
+	return NULL;
+    }
+
     ogs_list_init(window -> items);
     
     return window;
