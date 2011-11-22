@@ -52,10 +52,24 @@ OGS_PSCREEN ogs_init(int mode, int width, int height, int colors)
     oscreen -> screen = SDL_SetVideoMode(resolution.width, resolution.height, colors, type | SDL_DOUBLEBUF);
     
     oscreen -> list = malloc(sizeof(struct OGS_LIST));
+
+    oscreen -> resolution = resolution;
+    
     if (oscreen == NULL) return NULL;
     ogs_list_init(oscreen -> list);
 
     //TODELETE
+    OGS_PWINDOW_S window = malloc(sizeof(struct OGS_WINDOW_S));
+    window -> items = malloc(sizeof(struct OGS_LIST));
+    ogs_list_init(window -> items);
+    window -> fullscreen = 1;
+    window -> pos_type = 0;
+    window -> size.width = 500;
+    window -> size.height = 500;
+    window -> position.width = 0;
+    window -> position.height = 0;
+    ogs_list_add(oscreen -> list, OGS_WINDOW, (void*) window);
+
     OGS_PBUTTON_S button = malloc(sizeof(struct OGS_BUTTON_S));
     button -> position.width = 50;
     button -> position.height = 50;
@@ -64,8 +78,8 @@ OGS_PSCREEN ogs_init(int mode, int width, int height, int colors)
     button -> size.height = 30;
     button -> enabled = 1;
     button -> caption = "Hello, world!";
-    ogs_list_add(oscreen -> list, OGS_BUTTON, (void*) button);
-    ogs_draw_element(oscreen, OGS_BUTTON, (void*) button);
+    
+    ogs_list_add(window -> items, OGS_BUTTON, (void*) button);
     //TODELETE
     
     return oscreen;

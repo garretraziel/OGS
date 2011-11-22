@@ -64,6 +64,18 @@ int ogs_draw_element(OGS_PSCREEN screen, int type, void *element)
 
 int ogs_i_draw_window(OGS_PWINDOW_S window, OGS_PSCREEN screen)
 {
+    if (window -> fullscreen) {
+	boxColor(screen -> screen, 0, 0, screen -> resolution.width, screen -> resolution.height,\
+		 DARKBLUE);
+    } else {
+	boxColor(screen -> screen, window -> position.width, window -> position.height,	\
+		 window -> position.width + window -> size.width, window -> position.height + \
+		 window -> size.height, DARKBLUE);
+	rectangleColor(screen -> screen, window -> position.width+2, window -> position.height +2,	\
+		 window -> position.width + window -> size.width - 2, window -> position.height + \
+		 window -> size.height - 2, WHITE);
+    }
+    
     return 0;
 }
 
@@ -71,7 +83,7 @@ int ogs_i_draw_button(OGS_PBUTTON_S button, OGS_PSCREEN screen)
 {
     roundedBoxColor(screen -> screen, button->position.width-3, button->position.height-3, \
 		    button -> position.width + button -> size.width + 3, \
-		    button -> position.height + button -> size.height + 3, 2, 0xffffff55);
+		    button -> position.height + button -> size.height + 3, 2, 0xffffffCC); //TODO: asi ne pomoci alfakanalu
     if (button -> enabled) {
 	roundedBoxColor(screen -> screen, button->position.width, button->position.height, \
 		 button -> position.width + button -> size.width,	\

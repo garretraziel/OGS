@@ -109,6 +109,7 @@ typedef struct OGS_SCREEN{
 #define YELLOW 0xffff00ff
 #define PURPLE 0xff00ffff
 #define BLUE 0x00ffffff
+#define DARKBLUE 0x0000ffff
 #define GREEN 0x00ff00ff
 
 
