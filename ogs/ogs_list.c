@@ -19,6 +19,8 @@ int ogs_list_add(OGS_PLIST list, int type, void *item)
     temp -> item = item;
     temp -> next = NULL;
 
+    if (list -> act == NULL) list -> act = temp;
+
     if (list -> bot != NULL) list -> bot -> next = temp;
 
     if (list -> top == NULL) list -> top = list -> bot = temp;

@@ -38,17 +38,16 @@ int main(int argc, char *argv[])
     ogs_add_picture_to_window(window, 100, 100, 100, 100, "sekera.png");
     ogs_add_window(window, screen);
       
-    /* int cont = 1; */
-    /* while (cont) { */
-    /*     ogs_handle_input(screen); */
+    int cont = OGS_NOEVENT;
+    while (cont != OGS_QUIT) {
+        cont = ogs_handle_input(screen);
     /*     //poresit input a reakce na nej... */
-    /*     cont = ogs_was_quited(screen); */
-    /*     ogs_redraw(screen); */
-    /* } */
+        ogs_redraw(screen);
+    }
     
     ogs_redraw(screen);
     
-    fgetc(stdin);
+    //fgetc(stdin);
     
     ogs_delete_screen(screen);
     

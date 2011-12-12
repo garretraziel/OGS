@@ -16,6 +16,11 @@ enum {
 } OGS_PICTURE_TYPE; // types of picture - bmp, png or jpeg
 
 enum {
+    OGS_NOEVENT, OGS_QUIT, OGS_KEYLEFT, OGS_KEYRIGHT,
+    OGS_KEYDOWN, OGS_KEYUP, OGS_ENTER,
+} OGS_EVENTS; // types of event in ogs
+
+enum {
     OGS_OK, // everything went better than expected
     OGS_INIT_ERROR, // error while init of OGS
     OGS_NOMEM_ERROR, // not enought memory error
