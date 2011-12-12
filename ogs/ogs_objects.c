@@ -32,6 +32,7 @@ int ogs_delete_object(int type, void *pobject)
 	break;
     }
     case OGS_PICTURE: {
+        SDL_FreeSurface(((OGS_PPICTURE_S) pobject) -> image);
 	free((OGS_PPICTURE_S) pobject);
 	break;
     }

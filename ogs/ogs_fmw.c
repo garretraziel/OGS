@@ -1,4 +1,5 @@
 #include "ogs_fmw.h"
+#include <SDL/SDL_image.h>
 
 int ogs_i_init_sdl(int mode, OGS_RES resolution, int colors);
 
@@ -46,6 +47,15 @@ OGS_PSCREEN ogs_init(int mode, int width, int height, int colors)
         oscreen -> screen = NULL;
         return oscreen;
     }
+
+    int imgload = IMG_Init(IMG_INIT_JPG|IMG_INIT_PNG);
+
+    if ((imgload & (IMG_INIT_JPG|IMG_INIT_PNG)) != (IMG_INIT_JPG|IMG_INIT_PNG)) {
+        fprintf(stderr,"error: nemuzu nacist podporu obrazku\n");
+        return NULL;
+    }
+
+    atexit(IMG_Quit);
     
     int type = mode == OGS_FULLSCREEN? SDL_FULLSCREEN : SDL_HWSURFACE;
     
@@ -57,30 +67,6 @@ OGS_PSCREEN ogs_init(int mode, int width, int height, int colors)
     
     if (oscreen == NULL) return NULL;
     ogs_list_init(oscreen -> list);
-    
-    //TODELETE
-    OGS_PWINDOW_S window = malloc(sizeof(struct OGS_WINDOW_S));
-    window -> items = malloc(sizeof(struct OGS_LIST));
-    ogs_list_init(window -> items);
-    window -> fullscreen = 0;
-    window -> pos_type = 0;
-    window -> size.width = 500;
-    window -> size.height = 500;
-    window -> position.width = 0;
-    window -> position.height = 0;
-    ogs_list_add(oscreen -> list, OGS_WINDOW, (void*) window);
-    
-    OGS_PBUTTON_S button = malloc(sizeof(struct OGS_BUTTON_S));
-    button -> position.width = 50;
-    button -> position.height = 50;
-    
-    button -> size.width = 150;
-    button -> size.height = 30;
-    button -> enabled = 1;
-    button -> caption = "Hello, world!";
-    
-    ogs_list_add(window -> items, OGS_BUTTON, (void*) button);
-    //TODELETE
     
     return oscreen;
 }
@@ -128,10 +114,46 @@ int ogs_add_window(OGS_PWINDOW_S window, OGS_PSCREEN screen)
 int ogs_delete_screen(OGS_PSCREEN screen)
 {
     ogs_list_destroy(screen -> list);
+
+    SDL_FreeSurface(screen -> screen);
     
     free(screen);
     
     //TODO:...
     
     return OGS_OK;
+}
+
+int ogs_add_button_to_window(OGS_PWINDOW_S window, int x1, int y1, int x2, int y2, char *caption, void (*callfunction)(void), int enabled)
+{
+    OGS_PBUTTON_S button = malloc(sizeof(struct OGS_BUTTON_S));
+    
+    if (button == NULL) return OGS_NOMEM_ERROR;
+    button -> position.width = x1;
+    button -> position.height = y1;
+    
+    button -> size.width = x2-x1;
+    button -> size.height = y2-y1;
+    button -> enabled = enabled;
+    button -> caption = caption;
+
+    button -> function_execute = callfunction;
+    
+    return ogs_list_add(window -> items, OGS_BUTTON, (void*) button);
+}
+
+int ogs_add_picture_to_window(OGS_PWINDOW_S window, int x1, int y1, int x2, int y2, char *filename)
+{
+    OGS_PPICTURE_S picture = malloc(sizeof(struct OGS_PICTURE_S));
+    if (picture == NULL) return OGS_NOMEM_ERROR;
+
+    picture -> image = IMG_Load(filename); //TODO: resit velikost, zmenseni a tak
+    picture -> position.width = x1;
+    picture -> position.height = y1;
+    picture -> size.width = x2-x1;
+    picture -> size.height = y2-y1;
+
+    if (picture -> image == NULL) return OGS_FILE_ERROR;
+    
+    return ogs_list_add(window -> items, OGS_PICTURE, (void *) picture);
 }

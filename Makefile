@@ -4,7 +4,7 @@ OBJFILES=ogs_menu.o ogs/ogs_fmw.o ogs/ogs_list.o ogs/ogs_objects.o ogs/ogs_draw.
 
 CFLAGS=-std=c99 -Wall -Wextra -pedantic
 DFLAGS=-g
-LIBS=-lSDL -lSDL_gfx
+LIBS=-lSDL -lSDL_gfx -lSDL_image
 CC=gcc
 
 Release:all

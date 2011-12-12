@@ -20,6 +20,7 @@ enum {
     OGS_INIT_ERROR, // error while init of OGS
     OGS_NOMEM_ERROR, // not enought memory error
     OGS_SDL_ERROR, // error with SDL
+    OGS_FILE_ERROR, // error while operating with files
 } OGS_ERRORS; // types of error from program
 
 enum {
@@ -61,7 +62,7 @@ typedef struct OGS_BUTTON_S {
     OGS_RES position; // position of button
     OGS_RES size; // size of button
     char *caption; // what is written on that button
-    void *function_execute; // pointer to function that must be executed while is button clicked
+    void (*function_execute)(void); // pointer to function that must be executed while is button clicked
     int enabled; // if is button enabled
 } *OGS_PBUTTON_S; // object of button
 
@@ -93,6 +94,7 @@ typedef struct OGS_PICTURE_S {
     OGS_RES position; // position of picture
     OGS_RES size; // size of picture
     int type; // type of picture (BMP, JPEG, PNG...)
+    SDL_Surface *image; // picture itself
 } *OGS_PPICTURE_S; // object of picture
 
 typedef struct OGS_SCREEN{

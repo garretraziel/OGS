@@ -18,6 +18,8 @@ typedef struct {
     //...
 } ARGS;
 
+void pozdrav(void);
+
 int main(int argc, char *argv[])
 {
     int mode = OGS_WINDOWED; // should be fullscreen
@@ -30,20 +32,19 @@ int main(int argc, char *argv[])
     
     
     // code:
-    /*
-      OGS_PWINDOW_S window = ogs_create_window(x, y, x2, y2, OGS_REL, OGS_FULL);
-      ogs_add_button_to_window(window, x, y, x2, y2, "Hello, world", pozdrav, 1);
-      ogs_add_picture_to_window(window, x, y, x2, y2, "picture.png");
-      ogs_add_window(window, screen);
+    
+    OGS_PWINDOW_S window = ogs_create_window(0, 0, 400, 300, OGS_REL, OGS_FULLSCREEN);
+    ogs_add_button_to_window(window, 50, 50, 200, 80, "Hello, world", pozdrav, 0);
+    ogs_add_picture_to_window(window, 100, 100, 100, 100, "sekera.png");
+    ogs_add_window(window, screen);
       
-      int cont = 1;
-      while (cont) {
-      ogs_handle_input(screen);
-      poresit input a reakce na nej...
-      cont = ogs_was_quited(screen);
-      ogs_redraw(screen);
-      }
-    */
+    /* int cont = 1; */
+    /* while (cont) { */
+    /*     ogs_handle_input(screen); */
+    /*     //poresit input a reakce na nej... */
+    /*     cont = ogs_was_quited(screen); */
+    /*     ogs_redraw(screen); */
+    /* } */
     
     ogs_redraw(screen);
     
@@ -52,4 +53,9 @@ int main(int argc, char *argv[])
     ogs_delete_screen(screen);
     
     return 0;
+}
+
+void pozdrav(void)
+{
+    printf("Ahoj...\n");
 }

@@ -64,7 +64,7 @@ int ogs_draw_element(OGS_PSCREEN screen, int type, void *element)
 
 int ogs_i_draw_window(OGS_PWINDOW_S window, OGS_PSCREEN screen)
 {
-    if (window -> fullscreen) {
+    if (window -> fullscreen == OGS_FULLSCREEN) {
 	boxColor(screen -> screen, 0, 0, screen -> resolution.width, screen -> resolution.height,\
 		 WINDOW_C);
     } else {
@@ -114,6 +114,11 @@ int ogs_i_draw_textarray(OGS_PTEXTARRAY_S textarray, OGS_PSCREEN screen)
 
 int ogs_i_draw_picture(OGS_PPICTURE_S picture, OGS_PSCREEN screen)
 {
+    SDL_Rect rcDest = {picture -> position.width, picture -> position.height, 0, 0}; //TODO: velikost!!
+    //TODO: resit rozmery, vyrez vs. zmenseni a tak
+
+    SDL_BlitSurface(picture -> image, NULL, screen -> screen, &rcDest);
+    
     return 0;
 }
 
