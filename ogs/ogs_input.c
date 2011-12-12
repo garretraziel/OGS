@@ -1,6 +1,12 @@
 #include "ogs_input.h"
 #include <SDL/SDL.h>
 
+int ogs_i_goto_left(OGS_PSCREEN window);
+int ogs_i_goto_right(OGS_PSCREEN window);
+int ogs_i_goto_down(OGS_PSCREEN window);
+int ogs_i_goto_up(OGS_PSCREEN window);
+int ogs_i_do_action(OGS_PSCREEN window);
+
 int ogs_i_handle_input(OGS_PSCREEN window)
 {
     SDL_Event event;
@@ -15,8 +21,15 @@ int ogs_i_handle_input(OGS_PSCREEN window)
             switch (event.key.keysym.sym) {
             case SDLK_RIGHT:
                 lastevent = OGS_KEYRIGHT;
-                if (window -> list -> act -> next == NULL) window -> list -> act = window -> list -> top;
-                else window -> list -> act = window -> list -> act -> next;
+                ogs_i_goto_right(window);
+                break;
+            case SDLK_LEFT:
+                lastevent = OGS_KEYLEFT;
+                ogs_i_goto_left(window);
+                break;
+            case SDLK_RETURN:
+                lastevent = OGS_ENTER;
+                ogs_i_do_action(window);
                 break;
             default:
                 break;
@@ -29,4 +42,29 @@ int ogs_i_handle_input(OGS_PSCREEN window)
     }
     
     return lastevent;
+}
+
+int ogs_i_goto_left(OGS_PSCREEN window)
+{
+    return 0;
+}
+
+int ogs_i_goto_right(OGS_PSCREEN window)
+{
+    return 0;
+}
+
+int ogs_i_goto_down(OGS_PSCREEN window)
+{
+    return 0;
+}
+
+int ogs_i_goto_up(OGS_PSCREEN window)
+{
+    return 0;
+}
+
+int ogs_i_do_action(OGS_PSCREEN window)
+{
+    return 0;
 }
