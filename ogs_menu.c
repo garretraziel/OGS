@@ -41,13 +41,13 @@ int main(int argc, char *argv[])
     ogs_add_window(window, screen);
       
     int cont = OGS_NOEVENT;
+    ogs_redraw(screen);
+    
     while (cont != OGS_QUIT) {
         cont = ogs_handle_input(screen);
     /*     //poresit input a reakce na nej... */
-        ogs_redraw(screen);
     }
     
-    ogs_redraw(screen);
     
     //fgetc(stdin);
     

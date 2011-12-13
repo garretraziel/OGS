@@ -39,14 +39,17 @@ int ogs_handle_input(OGS_PSCREEN window)
             case SDLK_RIGHT:
                 lastevent = OGS_KEYRIGHT;
                 ogs_i_goto(window, right);
+                ogs_redraw(window);
                 break;
             case SDLK_LEFT:
                 lastevent = OGS_KEYLEFT;
                 ogs_i_goto(window, left);
+                ogs_redraw(window);
                 break;
             case SDLK_RETURN:
                 lastevent = OGS_ENTER;
                 ogs_i_do_action(window);
+                ogs_redraw(window);
                 break;
             case SDLK_ESCAPE:
                 return OGS_QUIT;
