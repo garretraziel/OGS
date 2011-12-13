@@ -46,6 +46,10 @@ typedef struct OGS_LIST_ITEM {
     int type; // type of item from OGS_OBJECTS
     void *item; // pointer to struct of this object
     struct OGS_LIST_ITEM *next; // next object in list
+    struct OGS_LIST_ITEM *up; // object that is up from this object
+    struct OGS_LIST_ITEM *down; // object that is down from this object
+    struct OGS_LIST_ITEM *left; // object that is left from this object
+    struct OGS_LIST_ITEM *right; // object that is right from this object
 } *OGS_LIST_PITEM; // abstract one item of list
 
 typedef struct OGS_LIST {

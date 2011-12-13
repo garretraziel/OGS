@@ -1,12 +1,26 @@
 #include "ogs_input.h"
+#include "ogs_draw.h"
 #include <SDL/SDL.h>
 
-int ogs_i_goto_left(OGS_PSCREEN screen);
-int ogs_i_goto_right(OGS_PSCREEN screen);
-int ogs_i_goto_down(OGS_PSCREEN screen);
-int ogs_i_goto_up(OGS_PSCREEN screen);
+#define ogs_i_goto(screen, where)                                       \
+    do {                                                                \
+        if (screen -> list -> act == NULL) break;                       \
+        OGS_LIST_PITEM actitem = screen -> list -> act;                 \
+        OGS_LIST_PITEM old_actitem = NULL;                              \
+        while (actitem != NULL && actitem -> type == OGS_WINDOW) {      \
+            old_actitem = actitem;                                      \
+            actitem = ((OGS_PWINDOW_S) actitem -> item) -> items -> act; \
+        }                                                               \
+        if (actitem == NULL) break;                                     \
+        if (old_actitem != NULL) {                                      \
+            if (actitem -> where != NULL)                               \
+                ((OGS_PWINDOW_S) old_actitem -> item) -> items -> act = actitem -> where; \
+        } else {                                                        \
+            if (actitem -> where != NULL) screen -> list -> act = actitem -> where; \
+        }                                                               \
+    } while (0)
+
 int ogs_i_do_action(OGS_PSCREEN screen);
-int ogs_i_do_window_action(OGS_PWINDOW_S window, OGS_PSCREEN screen);
 
 int ogs_handle_input(OGS_PSCREEN window)
 {
@@ -22,11 +36,11 @@ int ogs_handle_input(OGS_PSCREEN window)
             switch (event.key.keysym.sym) {
             case SDLK_RIGHT:
                 lastevent = OGS_KEYRIGHT;
-                ogs_i_goto_right(window);
+                ogs_i_goto(window, right);
                 break;
             case SDLK_LEFT:
                 lastevent = OGS_KEYLEFT;
-                ogs_i_goto_left(window);
+                ogs_i_goto(window, left);
                 break;
             case SDLK_RETURN:
                 lastevent = OGS_ENTER;
@@ -47,68 +61,20 @@ int ogs_handle_input(OGS_PSCREEN window)
     return lastevent;
 }
 
-int ogs_i_goto_left(OGS_PSCREEN screen)
-{
-    return 0;
-}
-
-int ogs_i_goto_right(OGS_PSCREEN screen)
-{
-    return 0;
-}
-
-int ogs_i_goto_down(OGS_PSCREEN screen)
-{
-    return 0;
-}
-
-int ogs_i_goto_up(OGS_PSCREEN screen)
-{
-    return 0;
-}
-
 int ogs_i_do_action(OGS_PSCREEN screen)
 {
     if (screen -> list -> act == NULL) return 0;
-    switch(screen -> list -> act -> type) {
-    case OGS_WINDOW: {
-        OGS_PWINDOW_S window = (OGS_PWINDOW_S) screen -> list -> act -> item;
-        ogs_i_do_window_action(window, screen);
-        break;
-    }
+    OGS_LIST_PITEM item = screen -> list -> act;
+    while (item != NULL && item -> type == OGS_WINDOW)
+        item = ((OGS_PWINDOW_S) item -> item) -> items -> act;
+    if (item == NULL) return 0;
+    switch(item -> type) {
     case OGS_BUTTON: {
-        OGS_PBUTTON_S button = (OGS_PBUTTON_S) screen -> list -> act -> item;
+        OGS_PBUTTON_S button = (OGS_PBUTTON_S) item -> item;
         if (button -> enabled) {
             button -> clicked = 1;
             ogs_redraw(screen);
             (button -> function_execute)();
-            button -> clicked = 0;
-            ogs_redraw(screen);
-        }
-        break;
-    }
-    default:
-        break;
-    }
-    return 0;
-}
-
-int ogs_i_do_window_action(OGS_PWINDOW_S window, OGS_PSCREEN screen)
-{
-    if (window -> items -> act == NULL) return 0;
-    switch(window -> items -> act -> type) {
-    case OGS_WINDOW: {
-        OGS_PWINDOW_S window_new = (OGS_PWINDOW_S) window -> items -> act -> item;
-        ogs_i_do_window_action(window_new, screen);
-        break;
-    }
-    case OGS_BUTTON: {
-        OGS_PBUTTON_S button = (OGS_PBUTTON_S) window -> items -> act -> item;
-        if (button -> enabled) {
-            button -> clicked = 1;
-            ogs_redraw(screen);
-            (button -> function_execute)();
-            SDL_Delay(100);
             button -> clicked = 0;
             ogs_redraw(screen);
         }

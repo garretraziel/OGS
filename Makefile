@@ -8,6 +8,7 @@ LIBS=-lSDL -lSDL_gfx -lSDL_image
 CC=gcc
 
 Release:all
+debug:Debug
 Debug:CFLAGS += -g
 Debug:all
 build:$(NAME)
