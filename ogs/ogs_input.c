@@ -28,6 +28,8 @@ int ogs_handle_input(OGS_PSCREEN window)
 
     int lastevent = OGS_NOEVENT;
 
+    SDL_Delay(10);
+
     while (SDL_PollEvent(&event)) {
         switch(event.type) {
         case SDL_QUIT:
