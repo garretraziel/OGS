@@ -69,6 +69,7 @@ typedef struct OGS_BUTTON_S {
     char *caption; // what is written on that button
     void (*function_execute)(void); // pointer to function that must be executed while is button clicked
     int enabled; // if is button enabled
+    int clicked; // if was button clicked
 } *OGS_PBUTTON_S; // object of button
 
 typedef struct OGS_INPUTF_S {
@@ -117,8 +118,10 @@ typedef struct OGS_SCREEN{
 #define PURPLE 0xff00ffff
 #define BLUE 0x00ffffff
 #define DARKBLUE 0x0000ffff
+#define LIGHTBLUE 0x57c4ffff
 #define GREEN 0x00ff00ff
 #define WINDOW_C 0xdcdcf0ff
+#define SILVER 0xd8e2e7ff
 
 
 #endif

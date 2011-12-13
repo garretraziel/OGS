@@ -136,6 +136,7 @@ int ogs_add_button_to_window(OGS_PWINDOW_S window, int x1, int y1, int x2, int y
     button -> size.height = y2-y1;
     button -> enabled = enabled;
     button -> caption = caption;
+    button -> clicked = 0;
 
     button -> function_execute = callfunction;
     

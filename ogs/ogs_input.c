@@ -6,7 +6,7 @@ int ogs_i_goto_right(OGS_PSCREEN screen);
 int ogs_i_goto_down(OGS_PSCREEN screen);
 int ogs_i_goto_up(OGS_PSCREEN screen);
 int ogs_i_do_action(OGS_PSCREEN screen);
-int ogs_i_do_window_action(OGS_PWINDOW_S window);
+int ogs_i_do_window_action(OGS_PWINDOW_S window, OGS_PSCREEN screen);
 
 int ogs_i_handle_input(OGS_PSCREEN window)
 {
@@ -73,12 +73,18 @@ int ogs_i_do_action(OGS_PSCREEN screen)
     switch(screen -> list -> act -> type) {
     case OGS_WINDOW: {
         OGS_PWINDOW_S window = (OGS_PWINDOW_S) screen -> list -> act -> item;
-        ogs_i_do_window_action(window);
+        ogs_i_do_window_action(window, screen);
         break;
     }
     case OGS_BUTTON: {
         OGS_PBUTTON_S button = (OGS_PBUTTON_S) screen -> list -> act -> item;
-        if (button -> enabled) (button -> function_execute)();
+        if (button -> enabled) {
+            button -> clicked = 1;
+            ogs_redraw(screen);
+            (button -> function_execute)();
+            button -> clicked = 0;
+            ogs_redraw(screen);
+        }
         break;
     }
     default:
@@ -87,18 +93,25 @@ int ogs_i_do_action(OGS_PSCREEN screen)
     return 0;
 }
 
-int ogs_i_do_window_action(OGS_PWINDOW_S window)
+int ogs_i_do_window_action(OGS_PWINDOW_S window, OGS_PSCREEN screen)
 {
     if (window -> items -> act == NULL) return 0;
     switch(window -> items -> act -> type) {
     case OGS_WINDOW: {
         OGS_PWINDOW_S window_new = (OGS_PWINDOW_S) window -> items -> act -> item;
-        ogs_i_do_window_action(window_new);
+        ogs_i_do_window_action(window_new, screen);
         break;
     }
     case OGS_BUTTON: {
         OGS_PBUTTON_S button = (OGS_PBUTTON_S) window -> items -> act -> item;
-        if (button -> enabled) (button -> function_execute)();
+        if (button -> enabled) {
+            button -> clicked = 1;
+            ogs_redraw(screen);
+            (button -> function_execute)();
+            SDL_Delay(100);
+            button -> clicked = 0;
+            ogs_redraw(screen);
+        }
         break;
     }
     default:
