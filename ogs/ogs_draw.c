@@ -165,10 +165,10 @@ int ogs_redraw_element(OGS_PSCREEN screen, OGS_LIST_PITEM item, int active)
     }
     case OGS_BUTTON: {
         OGS_PBUTTON_S button = item -> item;
-        x1 = button -> position.width - 3;
-        y1 = button -> position.height - 3;
-        x2 = button -> size.width + 3;
-        y2 = button -> size.height + 3;
+        x1 = button -> position.width;
+        y1 = button -> position.height;
+        x2 = button -> size.width;
+        y2 = button -> size.height;
         break;
     }
     case OGS_INPUTF:
@@ -179,16 +179,15 @@ int ogs_redraw_element(OGS_PSCREEN screen, OGS_LIST_PITEM item, int active)
         break;
     case OGS_PICTURE: {
         OGS_PPICTURE_S picture = item -> item;
-        x1 = picture -> position.width - 3;
-        y1 = picture -> position.height - 3;
-        x2 = picture -> size.width + 3;
-        y2 = picture -> size.height + 3;
-        printf("%d, %d, %d, %d\n",x1,y1,x2,y2);
+        x1 = picture -> position.width;
+        y1 = picture -> position.height;
+        x2 = picture -> size.width;
+        y2 = picture -> size.height;
         break;
     }
     default:
         break;
     }
-    SDL_UpdateRect(screen -> screen, x1, y1, x2, y2);
+    SDL_UpdateRect(screen -> screen, x1, y1, x2+1, y2+1);
     return 0;
 }
