@@ -1,11 +1,12 @@
 #include "ogs_input.h"
 #include <SDL/SDL.h>
 
-int ogs_i_goto_left(OGS_PSCREEN window);
-int ogs_i_goto_right(OGS_PSCREEN window);
-int ogs_i_goto_down(OGS_PSCREEN window);
-int ogs_i_goto_up(OGS_PSCREEN window);
-int ogs_i_do_action(OGS_PSCREEN window);
+int ogs_i_goto_left(OGS_PSCREEN screen);
+int ogs_i_goto_right(OGS_PSCREEN screen);
+int ogs_i_goto_down(OGS_PSCREEN screen);
+int ogs_i_goto_up(OGS_PSCREEN screen);
+int ogs_i_do_action(OGS_PSCREEN screen);
+int ogs_i_do_window_action(OGS_PWINDOW_S window);
 
 int ogs_i_handle_input(OGS_PSCREEN window)
 {
@@ -31,6 +32,8 @@ int ogs_i_handle_input(OGS_PSCREEN window)
                 lastevent = OGS_ENTER;
                 ogs_i_do_action(window);
                 break;
+            case SDLK_ESCAPE:
+                return OGS_QUIT;
             default:
                 break;
             }
@@ -44,27 +47,62 @@ int ogs_i_handle_input(OGS_PSCREEN window)
     return lastevent;
 }
 
-int ogs_i_goto_left(OGS_PSCREEN window)
+int ogs_i_goto_left(OGS_PSCREEN screen)
 {
     return 0;
 }
 
-int ogs_i_goto_right(OGS_PSCREEN window)
+int ogs_i_goto_right(OGS_PSCREEN screen)
 {
     return 0;
 }
 
-int ogs_i_goto_down(OGS_PSCREEN window)
+int ogs_i_goto_down(OGS_PSCREEN screen)
 {
     return 0;
 }
 
-int ogs_i_goto_up(OGS_PSCREEN window)
+int ogs_i_goto_up(OGS_PSCREEN screen)
 {
     return 0;
 }
 
-int ogs_i_do_action(OGS_PSCREEN window)
+int ogs_i_do_action(OGS_PSCREEN screen)
 {
+    if (screen -> list -> act == NULL) return 0;
+    switch(screen -> list -> act -> type) {
+    case OGS_WINDOW: {
+        OGS_PWINDOW_S window = (OGS_PWINDOW_S) screen -> list -> act -> item;
+        ogs_i_do_window_action(window);
+        break;
+    }
+    case OGS_BUTTON: {
+        OGS_PBUTTON_S button = (OGS_PBUTTON_S) screen -> list -> act -> item;
+        if (button -> enabled) (button -> function_execute)();
+        break;
+    }
+    default:
+        break;
+    }
+    return 0;
+}
+
+int ogs_i_do_window_action(OGS_PWINDOW_S window)
+{
+    if (window -> items -> act == NULL) return 0;
+    switch(window -> items -> act -> type) {
+    case OGS_WINDOW: {
+        OGS_PWINDOW_S window_new = (OGS_PWINDOW_S) window -> items -> act -> item;
+        ogs_i_do_window_action(window_new);
+        break;
+    }
+    case OGS_BUTTON: {
+        OGS_PBUTTON_S button = (OGS_PBUTTON_S) window -> items -> act -> item;
+        if (button -> enabled) (button -> function_execute)();
+        break;
+    }
+    default:
+        break;
+    }
     return 0;
 }

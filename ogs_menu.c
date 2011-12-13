@@ -33,8 +33,8 @@ int main(int argc, char *argv[])
     
     // code:
     
-    OGS_PWINDOW_S window = ogs_create_window(0, 0, 400, 300, OGS_REL, OGS_FULLSCREEN);
-    ogs_add_button_to_window(window, 50, 50, 200, 80, "Hello, world", pozdrav, 0);
+    OGS_PWINDOW_S window = ogs_create_window(0, 0, 700, 500, OGS_REL, OGS_WINDOWED);
+    ogs_add_button_to_window(window, 50, 50, 200, 80, "Hello, world", pozdrav, 1);
     ogs_add_picture_to_window(window, 100, 100, 100, 100, "sekera.png");
     ogs_add_window(window, screen);
       
