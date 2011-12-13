@@ -127,8 +127,8 @@ int ogs_i_draw_picture(OGS_PPICTURE_S picture, OGS_PSCREEN screen, int active)
     SDL_BlitSurface(picture -> image, NULL, screen -> screen, &rcDest);
 
     if (active) rectangleColor(screen -> screen, picture -> position.width, picture -> position.height, \
-                               picture -> position.width + picture -> image -> w, picture -> position.height + \
-                               picture -> image -> h, LIGHTBLUE);
+                               picture -> position.width + picture -> size.width, picture -> position.height + \
+                               picture -> size.height, LIGHTBLUE);
     
     return 0;
 }
@@ -179,10 +179,11 @@ int ogs_redraw_element(OGS_PSCREEN screen, OGS_LIST_PITEM item, int active)
         break;
     case OGS_PICTURE: {
         OGS_PPICTURE_S picture = item -> item;
-        x1 = picture -> position.width;
-        y1 = picture -> position.height;
-        x2 = picture -> position.width + picture -> size.width;
-        y2 = picture -> position.height + picture -> size.height;
+        x1 = picture -> position.width - 3;
+        y1 = picture -> position.height - 3;
+        x2 = picture -> position.width + picture -> size.width + 3;
+        y2 = picture -> position.height + picture -> size.height + 3;
+        printf("%d, %d, %d, %d\n",x1,y1,x2,y2);
         break;
     }
     default:

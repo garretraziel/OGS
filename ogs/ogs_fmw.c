@@ -1,5 +1,6 @@
 #include "ogs_fmw.h"
 #include <SDL/SDL_image.h>
+#include <SDL/SDL_rotozoom.h>
 
 int ogs_i_init_sdl(int mode, OGS_RES resolution, int colors);
 
@@ -149,10 +150,18 @@ int ogs_add_picture_to_window(OGS_PWINDOW_S window, int x1, int y1, int x2, int 
     if (picture == NULL) return OGS_NOMEM_ERROR;
 
     picture -> image = IMG_Load(filename); //TODO: resit velikost, zmenseni a tak
+    
+    double zoomx, zoomy;
+    zoomx = ((float) x2-x1)/picture -> image -> w;
+    zoomy = ((float) y2-y1)/picture -> image -> h;
+
+    picture -> image = rotozoomSurfaceXY(picture -> image, 0, zoomx, zoomy, 1);
+    if (picture -> image == NULL) return OGS_NOMEM_ERROR;
+        
     picture -> position.width = x1;
     picture -> position.height = y1;
-    picture -> size.width = x2-x1;
-    picture -> size.height = y2-y1;
+    picture -> size.width = x2 - x1;
+    picture -> size.height = y2 - y1;
 
     if (picture -> image == NULL) return OGS_FILE_ERROR;
     
