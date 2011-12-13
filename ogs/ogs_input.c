@@ -13,10 +13,17 @@
         }                                                               \
         if (actitem == NULL) break;                                     \
         if (old_actitem != NULL) {                                      \
-            if (actitem -> where != NULL)                               \
+            if (actitem -> where != NULL) {                             \
+                ogs_redraw_element(screen, actitem, 0);                 \
+                ogs_redraw_element(screen, actitem -> where, 1);        \
                 ((OGS_PWINDOW_S) old_actitem -> item) -> items -> act = actitem -> where; \
+            }                                                           \
         } else {                                                        \
-            if (actitem -> where != NULL) screen -> list -> act = actitem -> where; \
+            if (actitem -> where != NULL) {                             \
+                ogs_redraw_element(screen, actitem, 0);                 \
+                ogs_redraw_element(screen, actitem -> where, 1);        \
+                screen -> list -> act = actitem -> where;               \
+            }                                                           \
         }                                                               \
     } while (0)
 
@@ -39,17 +46,14 @@ int ogs_handle_input(OGS_PSCREEN window)
             case SDLK_RIGHT:
                 lastevent = OGS_KEYRIGHT;
                 ogs_i_goto(window, right);
-                ogs_redraw(window);
                 break;
             case SDLK_LEFT:
                 lastevent = OGS_KEYLEFT;
                 ogs_i_goto(window, left);
-                ogs_redraw(window);
                 break;
             case SDLK_RETURN:
                 lastevent = OGS_ENTER;
                 ogs_i_do_action(window);
-                ogs_redraw(window);
                 break;
             case SDLK_ESCAPE:
                 return OGS_QUIT;
@@ -78,10 +82,11 @@ int ogs_i_do_action(OGS_PSCREEN screen)
         OGS_PBUTTON_S button = (OGS_PBUTTON_S) item -> item;
         if (button -> enabled) {
             button -> clicked = 1;
-            ogs_redraw(screen);
+            ogs_redraw_element(screen, item, 1);
             (button -> function_execute)();
+            SDL_Delay(10);
             button -> clicked = 0;
-            ogs_redraw(screen);
+            ogs_redraw_element(screen, item, 1);
         }
         break;
     }
