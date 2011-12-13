@@ -7,7 +7,7 @@
 #include <SDL/SDL_image.h>
 #include "ogs_defines.h"
 
-int ogs_draw_element(OGS_PSCREEN screen,  int type, void *element);
+int ogs_draw_element(OGS_PSCREEN screen,  int type, void *element, int active);
 
 int ogs_redraw(OGS_PSCREEN screen);
 
