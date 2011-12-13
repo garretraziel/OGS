@@ -127,8 +127,8 @@ int ogs_i_draw_picture(OGS_PPICTURE_S picture, OGS_PSCREEN screen, int active)
     SDL_BlitSurface(picture -> image, NULL, screen -> screen, &rcDest);
 
     if (active) rectangleColor(screen -> screen, picture -> position.width, picture -> position.height, \
-                               picture -> position.width + picture -> size.width, picture -> position.height + \
-                               picture -> size.height, LIGHTBLUE);
+                               picture -> position.width + picture -> size.width - 1, picture -> position.height + \
+                               picture -> size.height - 1, LIGHTBLUE);
     
     return 0;
 }
