@@ -125,6 +125,10 @@ int ogs_i_draw_picture(OGS_PPICTURE_S picture, OGS_PSCREEN screen, int active)
     //TODO: resit rozmery, vyrez vs. zmenseni a tak
     
     SDL_BlitSurface(picture -> image, NULL, screen -> screen, &rcDest);
+
+    if (active) rectangleColor(screen -> screen, picture -> position.width, picture -> position.height, \
+                               picture -> position.width + picture -> image -> w, picture -> position.height + \
+                               picture -> image -> h, LIGHTBLUE);
     
     return 0;
 }
