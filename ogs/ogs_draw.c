@@ -159,16 +159,16 @@ int ogs_redraw_element(OGS_PSCREEN screen, OGS_LIST_PITEM item, int active)
         OGS_PWINDOW_S window = item -> item;
         x1 = window -> position.width;
         y1 = window -> position.height;
-        x2 = window -> position.width + window -> size.width;
-        y2 = window -> position.height + window -> size.height;
+        x2 = window -> size.width;
+        y2 = window -> size.height;
         break;
     }
     case OGS_BUTTON: {
         OGS_PBUTTON_S button = item -> item;
         x1 = button -> position.width - 3;
         y1 = button -> position.height - 3;
-        x2 = button -> position.width + button -> size.width + 3;
-        y2 = button -> position.height + button -> size.height + 3;
+        x2 = button -> size.width + 3;
+        y2 = button -> size.height + 3;
         break;
     }
     case OGS_INPUTF:
@@ -181,8 +181,8 @@ int ogs_redraw_element(OGS_PSCREEN screen, OGS_LIST_PITEM item, int active)
         OGS_PPICTURE_S picture = item -> item;
         x1 = picture -> position.width - 3;
         y1 = picture -> position.height - 3;
-        x2 = picture -> position.width + picture -> size.width + 3;
-        y2 = picture -> position.height + picture -> size.height + 3;
+        x2 = picture -> size.width + 3;
+        y2 = picture -> size.height + 3;
         printf("%d, %d, %d, %d\n",x1,y1,x2,y2);
         break;
     }
