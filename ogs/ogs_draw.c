@@ -135,7 +135,6 @@ int ogs_i_draw_picture(OGS_PPICTURE_S picture, OGS_PSCREEN screen, int active)
 
 int ogs_redraw(OGS_PSCREEN screen)
 {
-    
     OGS_LIST_PITEM item = screen -> list -> top;
     
     while (item != NULL) {

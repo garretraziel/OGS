@@ -23,10 +23,10 @@
 int ogs_i_do_action(OGS_PSCREEN screen);
 
 int ogs_handle_input(OGS_PSCREEN window)
-{
-    SDL_Delay(50);
-    
+{   
     SDL_Event event;
+
+    SDL_Delay(10);
 
     int lastevent = OGS_NOEVENT;
 
