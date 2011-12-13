@@ -22,6 +22,4 @@ int ogs_add_button_to_window(OGS_PWINDOW_S window, int x1, int y1, int x2, int y
 
 int ogs_add_picture_to_window(OGS_PWINDOW_S window, int x1, int y1, int x2, int y2, char *filename);
 
-int ogs_handle_input(OGS_PSCREEN screen);
-
 #endif

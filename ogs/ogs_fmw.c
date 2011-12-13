@@ -159,7 +159,3 @@ int ogs_add_picture_to_window(OGS_PWINDOW_S window, int x1, int y1, int x2, int 
     return ogs_list_add(window -> items, OGS_PICTURE, (void *) picture);
 }
 
-int ogs_handle_input(OGS_PSCREEN screen)
-{
-    return ogs_i_handle_input(screen);
-}

@@ -3,6 +3,6 @@
 
 #include "ogs_defines.h"
 
-int ogs_i_handle_input(OGS_PSCREEN window);
+int ogs_handle_input(OGS_PSCREEN window);
 
 #endif

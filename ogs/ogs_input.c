@@ -8,7 +8,7 @@ int ogs_i_goto_up(OGS_PSCREEN screen);
 int ogs_i_do_action(OGS_PSCREEN screen);
 int ogs_i_do_window_action(OGS_PWINDOW_S window, OGS_PSCREEN screen);
 
-int ogs_i_handle_input(OGS_PSCREEN window)
+int ogs_handle_input(OGS_PSCREEN window)
 {
     SDL_Event event;
 
