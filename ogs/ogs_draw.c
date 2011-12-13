@@ -123,7 +123,7 @@ int ogs_i_draw_picture(OGS_PPICTURE_S picture, OGS_PSCREEN screen, int active)
 {
     SDL_Rect rcDest = {picture -> position.width, picture -> position.height, 0, 0}; //TODO: velikost!!
     //TODO: resit rozmery, vyrez vs. zmenseni a tak
-    
+
     SDL_BlitSurface(picture -> image, NULL, screen -> screen, &rcDest);
 
     if (active) rectangleColor(screen -> screen, picture -> position.width, picture -> position.height, \
@@ -188,6 +188,8 @@ int ogs_redraw_element(OGS_PSCREEN screen, OGS_LIST_PITEM item, int active)
     default:
         break;
     }
+    //SDL_Rect rect = {.x=0,.y=0,.w=800,.h=600};
+    //SDL_FillRect(screen->screen,&rect, BLACK);
     SDL_UpdateRect(screen -> screen, x1, y1, x2+1, y2+1);
     return 0;
 }
