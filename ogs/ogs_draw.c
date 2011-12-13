@@ -83,16 +83,16 @@ int ogs_i_draw_window(OGS_PWINDOW_S window, OGS_PSCREEN screen, int active)
 
 int ogs_i_draw_button(OGS_PBUTTON_S button, OGS_PSCREEN screen, int active)
 {
-    roundedBoxColor(screen -> screen, button->position.width-3, button->position.height-3, \
+    boxColor(screen -> screen, button->position.width-3, button->position.height-3, \
                     button -> position.width + button -> size.width + 3, \
-                    button -> position.height + button -> size.height + 3, 2, 0xaaaaaaff); //TODO: asi ne pomoci alfakanalu
+                    button -> position.height + button -> size.height + 3, 0xaaaaaaff); //TODO: asi ne pomoci alfakanalu
     if (button -> enabled) {
-        roundedBoxColor(screen -> screen, button->position.width, button->position.height, \
+        boxColor(screen -> screen, button->position.width, button->position.height, \
                         button -> position.width + button -> size.width, \
-                        button -> position.height + button -> size.height, 2, WHITE);
-        if (button -> clicked) roundedBoxColor(screen -> screen, button->position.width+2, button->position.height+2, \
+                        button -> position.height + button -> size.height, WHITE);
+        if (button -> clicked) boxColor(screen -> screen, button->position.width+2, button->position.height+2, \
                                                button -> position.width + button -> size.width - 2, \
-                                               button -> position.height + button -> size.height - 2, 2, SILVER);
+                                               button -> position.height + button -> size.height - 2, SILVER);
         //TODO: jen pokus, udělat jinak
     }
     stringColor(screen -> screen, button -> position.width + 10,        \
