@@ -78,8 +78,9 @@ typedef struct OGS_BUTTON_S {
 
 typedef struct OGS_INPUTF_S {
     OGS_RES position; // position of input field
+    OGS_RES size; // trololo
     char *text; // text in input field
-    int size; // size of text
+    int textsize; // size of text
     int font; // font of text
     int enabled; // is inputfield enabled
 } *OGS_PINPUTF_S; // object of input field
@@ -95,8 +96,9 @@ typedef struct OGS_INFO_S {
 
 typedef struct OGS_TEXTARRAY_S {
     OGS_RES position; // position of text array
+    OGS_RES size; // trololo
     char *text; // text in text array
-    int size; // size of text
+    int textsize; // size of text
     int font; // font of text
 } *OGS_PTEXTARRAY_S; // object of text array
 

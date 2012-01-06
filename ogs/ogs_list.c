@@ -1,6 +1,6 @@
 #include "ogs_list.h"
 
-void ogs_i_find_positions(OGS_PLIST list, OGS_LIST_PITEM *item);
+void ogs_i_recount_positions(OGS_PLIST list);
 
 int ogs_list_init(OGS_PLIST list)
 {
@@ -21,17 +21,14 @@ int ogs_list_add(OGS_PLIST list, int type, void *item)
     temp -> item = item;
     temp -> next = NULL;
 
-    temp -> up = temp -> down = temp -> right = temp -> left = NULL;
-    temp -> left = list -> act;
-
-    ogs_i_find_positions(list, &temp);
-
-    /*if (list -> act == NULL)*/ list -> act = temp;
+    if (list -> act == NULL) list -> act = temp;
 
     if (list -> bot != NULL) list -> bot -> next = temp;
 
     if (list -> top == NULL) list -> top = list -> bot = temp;
     else list -> bot = temp;
+
+    ogs_i_recount_positions(list);
 
     return OGS_OK;
 }
@@ -60,7 +57,14 @@ int ogs_list_destroy(OGS_PLIST list)
     return 0;
 }
 
-void ogs_i_find_positions(OGS_PLIST list, OGS_LIST_PITEM *item)
+void ogs_i_recount_positions(OGS_PLIST list)
 {
-
+    if (list == NULL) return;
+    OGS_LIST_PITEM temp = list -> top;
+    while (temp != NULL) {
+        /* v podstate: projede nejdriv direct dolu, stejna souradnice, pokud tam neco bude, da to do prvek->down (nejblizsi) */
+        /* pote projede od x od leva doprava, pokud je y mensi jak objektu, spocita vzdalenost (pythagoras), pokud je */
+        /* nejblizsi, nastavi jako down */
+        /* pote se to stejne udela i pro levo, pravo a nahoru */
+    }
 }
