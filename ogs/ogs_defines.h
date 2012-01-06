@@ -102,6 +102,11 @@ typedef struct OGS_TEXTARRAY_S {
     int font; // font of text
 } *OGS_PTEXTARRAY_S; // object of text array
 
+typedef struct OGS_GENERIC_ITEM_S { // generic type for getting position
+    OGS_RES position; // position of item
+    OGS_RES size; // size of item
+} * OGS_PGENERIC_ITEM_S;
+
 typedef struct OGS_PICTURE_S {
     OGS_RES position; // position of picture
     OGS_RES size; // size of picture
