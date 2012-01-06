@@ -51,6 +51,14 @@ int ogs_handle_input(OGS_PSCREEN window)
                 lastevent = OGS_KEYLEFT;
                 ogs_i_goto(window, left);
                 break;
+            case SDLK_DOWN:
+                lastevent = OGS_KEYDOWN;
+                ogs_i_goto(window, down);
+                break;
+            case SDLK_UP:
+                lastevent = OGS_KEYUP;
+                ogs_i_goto(window, up);
+                break;
             case SDLK_RETURN:
                 lastevent = OGS_ENTER;
                 ogs_i_do_action(window);
@@ -83,7 +91,7 @@ int ogs_i_do_action(OGS_PSCREEN screen)
         if (button -> enabled) {
             button -> clicked = 1;
             ogs_redraw_element(screen, item, 1);
-            (button -> function_execute)();
+            (button -> function_execute)(button -> arg);
             SDL_Delay(10);
             button -> clicked = 0;
             ogs_redraw_element(screen, item, 1);

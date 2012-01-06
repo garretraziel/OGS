@@ -18,8 +18,8 @@ typedef struct {
     //...
 } ARGS;
 
-void pozdrav(void);
-void pozdrav2(void);
+void pozdrav(void *);
+void pozdrav2(void *);
 
 int main(int argc, char *argv[])
 {
@@ -30,13 +30,13 @@ int main(int argc, char *argv[])
     
     OGS_PSCREEN screen = ogs_init(mode, width, height, colors);
     
-    
+    int arg = 5;
     
     // code:
     
     OGS_PWINDOW_S window = ogs_create_window(0, 0, 700, 500, OGS_REL, OGS_WINDOWED);
-    ogs_add_button_to_window(window, 50, 50, 200, 80, "Hello, world", pozdrav, 1);
-    ogs_add_button_to_window(window, 50, 100, 200, 130, "Herp derp", pozdrav2, 1);
+    ogs_add_button_to_window(window, 50, 50, 200, 80, "Hello, world", pozdrav, &arg, 1);
+    ogs_add_button_to_window(window, 50, 100, 200, 130, "Herp derp", pozdrav2, NULL, 1);
     ogs_add_picture_to_window(window, 50, 200, 550, 500, "sekera.png");
     ogs_add_window(window, screen);
       
@@ -56,12 +56,12 @@ int main(int argc, char *argv[])
     return 0;
 }
 
-void pozdrav(void)
+void pozdrav(void *prvek)
 {
-    printf("Ahoj...\n");
+    printf("Ahoj: %d...\n", *((int *) prvek));
 }
 
-void pozdrav2(void)
+void pozdrav2(void *prvek)
 {
     printf("Nazdar...\n");
 }

@@ -81,7 +81,9 @@ void ogs_i_recount_positions(OGS_PLIST list)
                         temp -> down = temp2;
                         last_distance = ogs_item_x(temp2) - ogs_item_x(temp);
                     }
+            temp2 = temp2 -> next;
         }
+        temp = temp -> next;
     }
 }
 

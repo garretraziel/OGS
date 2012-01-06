@@ -71,7 +71,8 @@ typedef struct OGS_BUTTON_S {
     OGS_RES position; // position of button
     OGS_RES size; // size of button
     char *caption; // what is written on that button
-    void (*function_execute)(void); // pointer to function that must be executed while is button clicked
+    void (*function_execute)(void *); // pointer to function that must be executed while is button clicked
+    void *arg; // argument that give to the executed function.
     int enabled; // if is button enabled
     int clicked; // if was button clicked
 } *OGS_PBUTTON_S; // object of button
