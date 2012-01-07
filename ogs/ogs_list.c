@@ -77,12 +77,49 @@ void ogs_i_recount_positions(OGS_PLIST list)
         while (temp2 != NULL) {
             if (ogs_item_y(temp2) > ogs_item_y(temp))
                 if (ogs_item_x(temp2) == ogs_item_x(temp))
-                    if (last_distance > (ogs_item_x(temp2) - ogs_item_x(temp)) || last_distance == 0) {
+                    if ((last_distance > (ogs_item_y(temp2) - ogs_item_y(temp)) && (temp2 != temp)) || last_distance == 0) {
                         temp -> down = temp2;
+                        last_distance = ogs_item_y(temp2) - ogs_item_y(temp);
+                    }
+            temp2 = temp2 -> next;
+        }
+
+        temp2 = list -> top;
+        last_distance = 0;
+        while (temp2 != NULL) {
+            if (ogs_item_y(temp2) < ogs_item_y(temp))
+                if (ogs_item_x(temp2) == ogs_item_x(temp))
+                    if ((last_distance > (ogs_item_y(temp) - ogs_item_y(temp2)) && (temp2 != temp)) || last_distance == 0) {
+                        temp -> up = temp2;
+                        last_distance = ogs_item_y(temp) - ogs_item_y(temp2);
+                    }
+            temp2 = temp2 -> next;
+        }
+
+        temp2 = list -> top;
+        last_distance = 0;
+        while (temp2 != NULL) {
+            if (ogs_item_x(temp2) < ogs_item_x(temp))
+                if (ogs_item_y(temp2) == ogs_item_y(temp))
+                    if ((last_distance > (ogs_item_x(temp) - ogs_item_x(temp2)) && (temp2 != temp)) || last_distance == 0) {
+                        temp -> left = temp2;
+                        last_distance = ogs_item_x(temp) - ogs_item_x(temp2);
+                    }
+            temp2 = temp2 -> next;
+        }
+
+        temp2 = list -> top;
+        last_distance = 0;
+        while (temp2 != NULL) {
+            if (ogs_item_x(temp2) > ogs_item_x(temp))
+                if (ogs_item_y(temp2) == ogs_item_y(temp))
+                    if ((last_distance > (ogs_item_x(temp2) - ogs_item_x(temp)) && (temp2 != temp)) || last_distance == 0) {
+                        temp -> right = temp2;
                         last_distance = ogs_item_x(temp2) - ogs_item_x(temp);
                     }
             temp2 = temp2 -> next;
         }
+        
         temp = temp -> next;
     }
 }

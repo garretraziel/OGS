@@ -150,21 +150,21 @@ int ogs_add_picture_to_window(OGS_PWINDOW_S window, int x1, int y1, int x2, int 
     OGS_PPICTURE_S picture = malloc(sizeof(struct OGS_PICTURE_S));
     if (picture == NULL) return OGS_NOMEM_ERROR;
 
-    picture -> image = IMG_Load(filename); //TODO: resit velikost, zmenseni a tak
+    SDL_Surface *image = IMG_Load(filename); //TODO: resit velikost, zmenseni a tak
+    if (image == NULL) return OGS_FILE_ERROR;
     
     double zoomx, zoomy;
-    zoomx = ((float) x2-x1)/picture -> image -> w;
-    zoomy = ((float) y2-y1)/picture -> image -> h;
+    zoomx = ((float) x2-x1)/image -> w;
+    zoomy = ((float) y2-y1)/image -> h;
 
-    picture -> image = rotozoomSurfaceXY(picture -> image, 0, zoomx, zoomy, 1);
+    picture -> image = rotozoomSurfaceXY(image, 0, zoomx, zoomy, 1);
+    SDL_FreeSurface(image);
     if (picture -> image == NULL) return OGS_NOMEM_ERROR;
         
     picture -> position.width = x1;
     picture -> position.height = y1;
     picture -> size.width = x2 - x1;
     picture -> size.height = y2 - y1;
-
-    if (picture -> image == NULL) return OGS_FILE_ERROR;
     
     return ogs_list_add(window -> items, OGS_PICTURE, (void *) picture);
 }
