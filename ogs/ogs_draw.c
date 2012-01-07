@@ -165,10 +165,10 @@ int ogs_redraw_element(OGS_PSCREEN screen, OGS_LIST_PITEM item, int active)
     }
     case OGS_BUTTON: {
         OGS_PBUTTON_S button = item -> item;
-        x1 = button -> position.width;
-        y1 = button -> position.height;
-        x2 = button -> size.width;
-        y2 = button -> size.height;
+        x1 = button -> position.width - 3;
+        y1 = button -> position.height - 3;
+        x2 = button -> size.width + 3;
+        y2 = button -> size.height + 3;
         break;
     }
     case OGS_INPUTF:
@@ -190,6 +190,8 @@ int ogs_redraw_element(OGS_PSCREEN screen, OGS_LIST_PITEM item, int active)
     }
     //SDL_Rect rect = {.x=0,.y=0,.w=800,.h=600};
     //SDL_FillRect(screen->screen,&rect, BLACK);
+    if (x1 < 0) x1 = 0;
+    if (y1 < 0) y1 = 0;
     SDL_UpdateRect(screen -> screen, x1, y1, x2+1, y2+1);
     return 0;
 }
