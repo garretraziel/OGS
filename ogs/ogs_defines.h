@@ -58,6 +58,12 @@ typedef struct OGS_LIST {
     OGS_LIST_PITEM act; // actual item in list
 } *OGS_PLIST;
 
+typedef struct OGS_SCREEN{
+    SDL_Surface *screen; // SDL surface
+    OGS_RES resolution; // resolution of screen
+    OGS_PLIST list; // list of windows
+} *OGS_PSCREEN; // object representing whole screen
+
 typedef struct OGS_WINDOW_S {
     OGS_RES position; // position of window
     OGS_RES size; // size of window
@@ -71,7 +77,7 @@ typedef struct OGS_BUTTON_S {
     OGS_RES position; // position of button
     OGS_RES size; // size of button
     char *caption; // what is written on that button
-    void (*function_execute)(void *); // pointer to function that must be executed while is button clicked
+    void (*function_execute)(OGS_PSCREEN, void *); // pointer to function that must be executed while is button clicked
     void *arg; // argument that give to the executed function.
     int enabled; // if is button enabled
     int clicked; // if was button clicked
@@ -114,12 +120,6 @@ typedef struct OGS_PICTURE_S {
     int type; // type of picture (BMP, JPEG, PNG...)
     SDL_Surface *image; // picture itself
 } *OGS_PPICTURE_S; // object of picture
-
-typedef struct OGS_SCREEN{
-    SDL_Surface *screen; // SDL surface
-    OGS_RES resolution; // resolution of screen
-    OGS_PLIST list; // list of windows
-} *OGS_PSCREEN; // object representing whole screen
 
 // COLORS:
 

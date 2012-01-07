@@ -18,22 +18,25 @@ typedef struct {
     //...
 } ARGS;
 
-void pozdrav(void *);
-void pozdrav2(void *);
-void pozdrav3(void *);
-void pozdrav4(void *);
+void pozdrav(OGS_PSCREEN, void *);
+void pozdrav2(OGS_PSCREEN, void *);
+void pozdrav3(OGS_PSCREEN, void *);
+void pozdrav4(OGS_PSCREEN, void *);
+void pridej_tlacitko(OGS_PSCREEN, void *);
 
 int main(int argc, char *argv[])
 {
     int mode = OGS_WINDOWED; // should be fullscreen
-    int width = 800;
-    int height = 600;
+    int width = 1024;
+    int height = 768;
     int colors = 16;
     
     OGS_PSCREEN screen = ogs_init(mode, width, height, colors);
     
     int arg = 5;
     int arg2 = 6;
+
+    OGS_RES souradnice = {.width = 0, .height = 0};
     
     // code:
     
@@ -42,6 +45,8 @@ int main(int argc, char *argv[])
     ogs_add_button_to_window(window, 50, 100, 200, 130, "Herp derp", pozdrav2, NULL, 1);
     ogs_add_button_to_window(window, 300, 50, 450, 80, "Hello, world2", pozdrav3, &arg2, 1);
     ogs_add_button_to_window(window, 300, 100, 450, 130, "Herp derp2", pozdrav4, NULL, 1);
+    ogs_add_button_to_window(window, 550, 50, 700, 80, "Hello, world3", pozdrav3, &arg2, 1);
+    ogs_add_button_to_window(window, 550, 100, 700, 130, "Herp derp3", pridej_tlacitko, &souradnice, 1);
     ogs_add_picture_to_window(window, 50, 200, 550, 500, "sekera.png");
     ogs_add_window(window, screen);
       
@@ -61,22 +66,31 @@ int main(int argc, char *argv[])
     return 0;
 }
 
-void pozdrav(void *prvek)
+void pozdrav(OGS_PSCREEN screen, void *prvek)
 {
     printf("Ahoj: %d...\n", *((int *) prvek));
 }
 
-void pozdrav2(void *prvek)
+void pozdrav2(OGS_PSCREEN screen, void *prvek)
 {
     printf("Nazdar...\n");
 }
 
-void pozdrav3(void *prvek)
+void pozdrav3(OGS_PSCREEN screen, void *prvek)
 {
     printf("Herp: %d\n", *((int *) prvek));
 }
 
-void pozdrav4(void *prvek)
+void pozdrav4(OGS_PSCREEN screen, void *prvek)
 {
     printf("Derp\n");
+}
+
+void pridej_tlacitko(OGS_PSCREEN screen, void *prvek)
+{
+    int x = ((OGS_RES *) prvek) -> width;
+    int y = ((OGS_RES *) prvek) -> height;
+    ogs_add_button_to_window(screen -> list -> top -> item, x, y, x+150, y+30, "dalsi", pozdrav2, NULL, 1);
+    ogs_redraw(screen);
+    ((OGS_RES *) prvek) -> height += 50;
 }

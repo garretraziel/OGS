@@ -91,7 +91,7 @@ int ogs_i_do_action(OGS_PSCREEN screen)
         if (button -> enabled) {
             button -> clicked = 1;
             ogs_redraw_element(screen, item, 1);
-            (button -> function_execute)(button -> arg);
+            (button -> function_execute)(screen, button -> arg);
             SDL_Delay(100);
             button -> clicked = 0;
             ogs_redraw_element(screen, item, 1);

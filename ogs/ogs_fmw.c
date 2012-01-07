@@ -125,7 +125,7 @@ int ogs_delete_screen(OGS_PSCREEN screen)
     return OGS_OK;
 }
 
-int ogs_add_button_to_window(OGS_PWINDOW_S window, int x1, int y1, int x2, int y2, char *caption, void (*callfunction)(void *), void *argument, int enabled)
+int ogs_add_button_to_window(OGS_PWINDOW_S window, int x1, int y1, int x2, int y2, char *caption, void (*callfunction)(OGS_PSCREEN, void *), void *argument, int enabled)
 {
     OGS_PBUTTON_S button = malloc(sizeof(struct OGS_BUTTON_S));
     
