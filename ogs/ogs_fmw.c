@@ -68,6 +68,13 @@ OGS_PSCREEN ogs_init(int mode, int width, int height, int colors)
     
     if (oscreen == NULL) return NULL;
     ogs_list_init(oscreen -> list);
+
+    oscreen -> joystick = NULL;
+    
+    if (SDL_NumJoysticks() > 0) {
+        SDL_JoystickEventState(SDL_ENABLE);
+        oscreen -> joystick = SDL_JoystickOpen(0);
+    }
     
     return oscreen;
 }
@@ -119,6 +126,8 @@ int ogs_add_window(OGS_PWINDOW_S window, OGS_PSCREEN screen)
 int ogs_delete_screen(OGS_PSCREEN screen)
 {
     ogs_list_destroy(screen -> list);
+
+    if (screen -> joystick != NULL) SDL_JoystickClose(screen -> joystick);
 
     SDL_FreeSurface(screen -> screen);
     

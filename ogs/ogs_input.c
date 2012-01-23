@@ -73,6 +73,32 @@ int ogs_handle_input(OGS_PSCREEN window)
             }
             break;
         }
+        case SDL_JOYBUTTONDOWN: {
+            if (event.jbutton.button == 1) {
+                lastevent = OGS_ENTER;
+                ogs_i_do_action(window);
+            }
+            break;
+        }
+        case SDL_JOYHATMOTION: {
+            if (event.jhat.value & SDL_HAT_UP) {
+                lastevent = OGS_KEYUP;
+                ogs_i_goto(window, up);
+            }
+            if (event.jhat.value & SDL_HAT_DOWN) {
+                lastevent = OGS_KEYDOWN;
+                ogs_i_goto(window, down);
+            }
+            if (event.jhat.value & SDL_HAT_LEFT) {
+                lastevent = OGS_KEYLEFT;
+                ogs_i_goto(window, left);
+            }
+            if (event.jhat.value & SDL_HAT_RIGHT) {
+                lastevent = OGS_KEYRIGHT;
+                ogs_i_goto(window, right);
+            }
+            break;
+        }
         default:
             break;
         }

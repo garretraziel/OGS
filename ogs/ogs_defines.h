@@ -62,6 +62,7 @@ typedef struct OGS_SCREEN{
     SDL_Surface *screen; // SDL surface
     OGS_RES resolution; // resolution of screen
     OGS_PLIST list; // list of windows
+    SDL_Joystick *joystick; // joystick for OGS TODO: this will be list
 } *OGS_PSCREEN; // object representing whole screen
 
 typedef struct OGS_WINDOW_S {
