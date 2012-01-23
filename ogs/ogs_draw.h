@@ -11,6 +11,6 @@ int ogs_draw_element(OGS_PSCREEN screen,  int type, void *element, int active, O
 
 int ogs_redraw(OGS_PSCREEN screen);
 
-int ogs_redraw_element(OGS_PSCREEN screen, OGS_LIST_PITEM item, int active);
+int ogs_redraw_element(OGS_PSCREEN screen, OGS_LIST_PITEM item, int active, OGS_RES offset);
 
 #endif

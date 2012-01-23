@@ -153,9 +153,9 @@ int ogs_redraw(OGS_PSCREEN screen)
     return 0;
 }
 
-int ogs_redraw_element(OGS_PSCREEN screen, OGS_LIST_PITEM item, int active)
+int ogs_redraw_element(OGS_PSCREEN screen, OGS_LIST_PITEM item, int active, OGS_RES offset)
 {
-    ogs_draw_element(screen, item -> type, item -> item, active);
+    ogs_draw_element(screen, item -> type, item -> item, active, offset);
     int x1, x2, y1, y2;
     x1 = x2 = y1 = y2 = 0;
     switch (item -> type) {

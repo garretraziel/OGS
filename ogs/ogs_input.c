@@ -4,24 +4,27 @@
 
 #define ogs_i_goto(screen, where)                                       \
     do {                                                                \
+        OGS_RES offset = {.width=0, .height=0};                         \
         if (screen -> list -> act == NULL) break;                       \
         OGS_LIST_PITEM actitem = screen -> list -> act;                 \
         OGS_LIST_PITEM old_actitem = NULL;                              \
         while (actitem != NULL && actitem -> type == OGS_WINDOW) {      \
             old_actitem = actitem;                                      \
             actitem = ((OGS_PWINDOW_S) actitem -> item) -> items -> act; \
+            offset.width += ((OGS_PWINDOW_S) actitem -> item) -> position.width; \
+            offset.height += ((OGS_PWINDOW_S) actitem -> item) -> position.height; \
         }                                                               \
         if (actitem == NULL) break;                                     \
         if (old_actitem != NULL) {                                      \
             if (actitem -> where != NULL) {                             \
-                ogs_redraw_element(screen, actitem, 0);                 \
-                ogs_redraw_element(screen, actitem -> where, 1);        \
+                ogs_redraw_element(screen, actitem, 0, offset);         \
+                ogs_redraw_element(screen, actitem -> where, 1, offset); \
                 ((OGS_PWINDOW_S) old_actitem -> item) -> items -> act = actitem -> where; \
             }                                                           \
         } else {                                                        \
             if (actitem -> where != NULL) {                             \
-                ogs_redraw_element(screen, actitem, 0);                 \
-                ogs_redraw_element(screen, actitem -> where, 1);        \
+                ogs_redraw_element(screen, actitem, 0, offset);         \
+                ogs_redraw_element(screen, actitem -> where, 1, offset); \
                 screen -> list -> act = actitem -> where;               \
             }                                                           \
         }                                                               \
@@ -82,19 +85,23 @@ int ogs_i_do_action(OGS_PSCREEN screen)
 {
     if (screen -> list -> act == NULL) return 0;
     OGS_LIST_PITEM item = screen -> list -> act;
-    while (item != NULL && item -> type == OGS_WINDOW)
+    OGS_RES offset = {.width = 0, .height = 0};
+    while (item != NULL && item -> type == OGS_WINDOW) {
         item = ((OGS_PWINDOW_S) item -> item) -> items -> act;
+        offset.width = ((OGS_PWINDOW_S) item -> item) -> position.width;
+        offset.height = ((OGS_PWINDOW_S) item -> item) -> position.height;
+    }
     if (item == NULL) return 0;
     switch(item -> type) {
     case OGS_BUTTON: {
         OGS_PBUTTON_S button = (OGS_PBUTTON_S) item -> item;
         if (button -> enabled) {
             button -> clicked = 1;
-            ogs_redraw_element(screen, item, 1);
+            ogs_redraw_element(screen, item, 1, offset);
             (button -> function_execute)(screen, button -> arg);
             SDL_Delay(100);
             button -> clicked = 0;
-            ogs_redraw_element(screen, item, 1);
+            ogs_redraw_element(screen, item, 1, offset);
         }
         break;
     }
