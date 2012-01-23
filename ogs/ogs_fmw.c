@@ -13,7 +13,7 @@ int ogs_i_init_sdl(int mode, OGS_RES resolution, int colors)
         return OGS_INIT_ERROR;
     }
     
-    if (SDL_Init(SDL_INIT_VIDEO) < 0) {
+    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_JOYSTICK) < 0) {
         fprintf(stderr,"Unable to initialize SDL: %s\n", SDL_GetError());
         return OGS_SDL_ERROR;
     }
