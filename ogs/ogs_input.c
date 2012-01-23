@@ -99,6 +99,26 @@ int ogs_handle_input(OGS_PSCREEN window)
             }
             break;
         }
+        case SDL_JOYAXISMOTION: {
+            if (event.jaxis.axis % 2 == 0) {
+                if (event.jaxis.value < -30000) {
+                    lastevent = OGS_KEYLEFT;
+                    ogs_i_goto(window, left);
+                } else if (event.jaxis.value > 30000) {
+                    lastevent = OGS_KEYRIGHT;
+                    ogs_i_goto(window, right);
+                }
+            } else {
+                if (event.jaxis.value < -30000) {
+                    lastevent = OGS_KEYUP;
+                    ogs_i_goto(window, up);
+                } else if (event.jaxis.value > 30000) {
+                    lastevent = OGS_KEYDOWN;
+                    ogs_i_goto(window, down);
+                }
+            }
+            break;
+        }
         default:
             break;
         }
