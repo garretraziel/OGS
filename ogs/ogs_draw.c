@@ -161,16 +161,16 @@ int ogs_redraw_element(OGS_PSCREEN screen, OGS_LIST_PITEM item, int active, OGS_
     switch (item -> type) {
     case OGS_WINDOW: {
         OGS_PWINDOW_S window = item -> item;
-        x1 = window -> position.width;
-        y1 = window -> position.height;
+        x1 = window -> position.width + offset.width;
+        y1 = window -> position.height + offset.height;
         x2 = window -> size.width;
         y2 = window -> size.height;
         break;
     }
     case OGS_BUTTON: {
         OGS_PBUTTON_S button = item -> item;
-        x1 = button -> position.width - 3;
-        y1 = button -> position.height - 3;
+        x1 = button -> position.width - 3 + offset.width;
+        y1 = button -> position.height - 3 + offset.height;
         x2 = button -> size.width + 3;
         y2 = button -> size.height + 3;
         break;
@@ -183,8 +183,8 @@ int ogs_redraw_element(OGS_PSCREEN screen, OGS_LIST_PITEM item, int active, OGS_
         break;
     case OGS_PICTURE: {
         OGS_PPICTURE_S picture = item -> item;
-        x1 = picture -> position.width;
-        y1 = picture -> position.height;
+        x1 = picture -> position.width + offset.width;
+        y1 = picture -> position.height + offset.height;
         x2 = picture -> size.width;
         y2 = picture -> size.height;
         break;
