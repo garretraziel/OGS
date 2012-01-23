@@ -87,6 +87,10 @@ OGS_PWINDOW_S ogs_create_window(int x1, int y1, int x2, int y2, int pos_type, in
     window -> size.height = y2 - y1;
     window -> pos_type = pos_type;
     window -> fullscreen = fullscreen;
+    window -> hoffset = 0;
+    window -> voffset = 0;
+    window -> hscroll = 0;
+    window -> vscroll = 0;
     
     window -> items = malloc(sizeof(struct OGS_LIST));
     

@@ -70,6 +70,10 @@ typedef struct OGS_WINDOW_S {
     int pos_type; // position type inside window (ABS or REL)
     int fullscreen; // if is window covering whole screen
     OGS_PLIST items; // list of items in this window
+    int hscroll; // wether it has horizontal scrollbar
+    int vscroll; // wether it has vertical scrollbar
+    int hoffset; // horizontal offset, default 0 - to use with scrollbar
+    int voffset; // vertical offset, default 0 - to use with scrollbar
     //...
 } *OGS_PWINDOW_S; // object of main window
 
