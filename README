@@ -1,0 +1,17 @@
+Open Gaming System
+------------------
+
+Open Gaming System is simple and open system for cataloging, managing and launching games. The goal is to create multiplatform environment, that is fully usable only by using gamepad or other gaming device, so it could be ran without any additional GUI only on the top of the xserver. Game entries should be easily configurable (by using XML) and there should be tools that are other gaming systems (for example Nintendo Wii) providing, like file browser, internet browser, simple text editor and others.
+ This project is aimed for opensource licensed games and/or for emulators (to play famous games from older gaming consoles). In ideal case, one will be able to buy some cheap miniPC, install linux and OGS on it and then connect it to TV and use it with some cheap gamepad as gaming console (with emulators and ROMs of his favourite games).
+
+The open gaming system project consists of two parts - ogs_fmw and ogs_menu.
+
+ogs_fmw
+-------
+Is currently under development. It will be SDL framework, that provides simple functions (for windows, buttons, checkboxes and others) to build GUI, fully controlable with keyboard/gamepad.
+
+ogs_menu
+--------
+Is currently in planning-phase. It will be launcher itself.
+
+Garret Raziel (g) 2012
