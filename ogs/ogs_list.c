@@ -2,8 +2,21 @@
 
 #define ogs_item_x(list_item) (((OGS_PGENERIC_ITEM_S) list_item -> item) -> position.width)
 #define ogs_item_y(list_item) (((OGS_PGENERIC_ITEM_S) list_item -> item) -> position.height)
+
+#define ogs_item_x_lower(list_item) (((OGS_PGENERIC_ITEM_S) list_item -> item) -> position.width + \
+                                     ((OGS_PGENERIC_ITEM_S) list_item -> item) -> size.width)
+#define ogs_item_y_lower(list_item) (((OGS_PGENERIC_ITEM_S) list_item -> item) -> position.height + \
+                                     ((OGS_PGENERIC_ITEM_S) list_item -> item) -> size.height)
+
 #define ogs_item_center_x(list_item) (ogs_item_x(list_item) / 2)
 #define ogs_item_center_y(list_item) (ogs_item_y(list_item) / 2)
+
+typedef enum {UL, UR, LL, LR} OGS_CORNERS; // for identifying corners (upper/lower)-(left/right)
+
+#define ogs_closest_corner(list_item, original_item) (                  \
+                                                      (ogs_center_x(original_item) - ogs_item_x(list_item)) < 0 ? \
+                                                      ((ogs_center_y(original_item) - ogs_item_y(list_item)) < 0 ? UL : LL) \
+                                                      : ((ogs_center_y(original_item) - ogs_item_y(list_item)) < 0 ? UR : LR))
 
 void ogs_i_recount_positions(OGS_PLIST list);
 
