@@ -90,51 +90,54 @@ void ogs_i_recount_positions(OGS_PLIST list)
         /* pote se to stejne udela i pro levo, pravo a nahoru */
 
         OGS_LIST_PITEM temp2 = list -> top;
-        int last_distance = 0;
+        int last_distance = -1;
         while (temp2 != NULL) {
-            if (ogs_item_y(temp2) > ogs_item_y(temp))
-                if (ogs_item_x(temp2) == ogs_item_x(temp))
-                    if ((last_distance > (ogs_item_y(temp2) - ogs_item_y(temp)) && (temp2 != temp)) || last_distance == 0) {
-                        temp -> down = temp2;
-                        last_distance = ogs_item_y(temp2) - ogs_item_y(temp);
-                    }
+            if (ogs_item_y(temp2) > ogs_item_y(temp)) {
+                int distance = ogs_distance(temp2, temp);
+                if (distance < last_distance || last_distance == -1) {
+                    last_distance = distance;
+                    temp -> down = temp2;
+                }
+            }
             temp2 = temp2 -> next;
         }
 
         temp2 = list -> top;
-        last_distance = 0;
+        last_distance = -1;
         while (temp2 != NULL) {
-            if (ogs_item_y(temp2) < ogs_item_y(temp))
-                if (ogs_item_x(temp2) == ogs_item_x(temp))
-                    if ((last_distance > (ogs_item_y(temp) - ogs_item_y(temp2)) && (temp2 != temp)) || last_distance == 0) {
-                        temp -> up = temp2;
-                        last_distance = ogs_item_y(temp) - ogs_item_y(temp2);
-                        //last_distance = ogs_distance(temp, temp2);
-                    }
+            if (ogs_item_y(temp2) < ogs_item_y(temp)) {
+                int distance = ogs_distance(temp2, temp);
+                if (distance < last_distance || last_distance == -1) {
+                    last_distance = distance;
+                    temp -> up = temp2;
+                }
+            }
             temp2 = temp2 -> next;
         }
 
         temp2 = list -> top;
-        last_distance = 0;
+        last_distance = -1;
         while (temp2 != NULL) {
-            if (ogs_item_x(temp2) < ogs_item_x(temp))
-                if (ogs_item_y(temp2) == ogs_item_y(temp))
-                    if ((last_distance > (ogs_item_x(temp) - ogs_item_x(temp2)) && (temp2 != temp)) || last_distance == 0) {
-                        temp -> left = temp2;
-                        last_distance = ogs_item_x(temp) - ogs_item_x(temp2);
-                    }
+            if (ogs_item_x(temp2) < ogs_item_x(temp)) {
+                int distance = ogs_distance(temp2, temp);
+                if (distance < last_distance || last_distance == -1) {
+                    last_distance = distance;
+                    temp -> left = temp2;
+                }
+            }
             temp2 = temp2 -> next;
         }
 
         temp2 = list -> top;
-        last_distance = 0;
+        last_distance = -1;
         while (temp2 != NULL) {
-            if (ogs_item_x(temp2) > ogs_item_x(temp))
-                if (ogs_item_y(temp2) == ogs_item_y(temp))
-                    if ((last_distance > (ogs_item_x(temp2) - ogs_item_x(temp)) && (temp2 != temp)) || last_distance == 0) {
-                        temp -> right = temp2;
-                        last_distance = ogs_item_x(temp2) - ogs_item_x(temp);
-                    }
+            if (ogs_item_x(temp2) > ogs_item_x(temp)) {
+                int distance = ogs_distance(temp2, temp);
+                if (distance < last_distance || last_distance == -1) {
+                    last_distance = distance;
+                    temp -> right = temp2;
+                }
+            }
             temp2 = temp2 -> next;
         }
         
