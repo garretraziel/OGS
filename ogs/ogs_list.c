@@ -2,6 +2,8 @@
 
 #define ogs_item_x(list_item) (((OGS_PGENERIC_ITEM_S) list_item -> item) -> position.width)
 #define ogs_item_y(list_item) (((OGS_PGENERIC_ITEM_S) list_item -> item) -> position.height)
+#define ogs_item_center_x(list_item) (ogs_item_x(list_item) / 2)
+#define ogs_item_center_y(list_item) (ogs_item_y(list_item) / 2)
 
 void ogs_i_recount_positions(OGS_PLIST list);
 
