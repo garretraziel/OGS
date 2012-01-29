@@ -2,6 +2,7 @@
 #define __OGS_LIST_H__
 
 #include <stdio.h>
+#include <math.h>
 #include "ogs_defines.h"
 #include "ogs_objects.h"
 

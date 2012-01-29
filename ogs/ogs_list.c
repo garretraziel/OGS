@@ -9,16 +9,39 @@
 #define ogs_item_x_lower(list_item) (ogs_item_x(list_item) + ogs_item_abstract_x(list_item, size))
 #define ogs_item_y_lower(list_item) (ogs_item_y(list_item) + ogs_item_abstract_y(list_item, size))
 
-#define ogs_item_center_x(list_item) (ogs_item_x(list_item) + ogs_item_x_lower(list_item) / 2)
-#define ogs_item_center_y(list_item) (ogs_item_y(list_item) + ogs_item_y_lower(list_item) / 2)
+#define ogs_item_center_x(list_item) (ogs_item_x(list_item) + (ogs_item_x_lower(list_item) / 2))
+#define ogs_item_center_y(list_item) (ogs_item_y(list_item) + (ogs_item_y_lower(list_item) / 2))
 
 typedef enum {UL, UR, LL, LR} OGS_CORNERS; // for identifying corners (upper/lower)-(left/right)
 
 #define ogs_closest_corner(list_item, original_item) (                  \
-                                                      (ogs_center_x(original_item) - ogs_item_x(list_item)) < 0 ? \
-                                                      ((ogs_center_y(original_item) - ogs_item_y(list_item)) < 0 ? UL : LL) \
-                                                      : ((ogs_center_y(original_item) - ogs_item_y(list_item)) < 0 ? UR : LR))
-#define ogs_distance(list_item, original_item, distance) do {   \
+                                                      (ogs_item_center_x(original_item) - ogs_item_x(list_item)) < 0 ? \
+                                                      ((ogs_item_center_y(original_item) - ogs_item_y(list_item)) < 0 ? UL : LL) \
+                                                      : ((ogs_item_center_y(original_item) - ogs_item_y(list_item)) < 0 ? UR : LR))
+#define ogs_distance(list_item, original_item, distance) do {           \
+        int nejblizsi = ogs_closest_corner(list_item, original_item);   \
+        int makrotemp = 0;                                              \
+        int makrotemp2 = 0;                                             \
+        switch(nejblizsi) {                                             \
+        case UL:                                                        \
+            makrotemp = ogs_item_x(list_item) - ogs_item_center_x(original_item); \
+            makrotemp2 = ogs_item_y(list_item) - ogs_item_center_y(original_item); \
+            break;                                                      \
+        case UR:                                                        \
+            makrotemp = ogs_item_x_lower(list_item) - ogs_item_center_x(original_item); \
+            makrotemp2 = ogs_item_y(list_item) - ogs_item_center_y(original_item); \
+            break;                                                      \
+        case LL:                                                        \
+            makrotemp = ogs_item_x(list_item) - ogs_item_center_x(original_item); \
+            makrotemp2 = ogs_item_y_lower(list_item) - ogs_item_center_y(original_item); \
+            break;                                                      \
+        case LR:                                                        \
+            makrotemp = ogs_item_x_lower(list_item) - ogs_item_center_x(original_item); \
+            makrotemp2 = ogs_item_y_lower(list_item) - ogs_item_center_y(original_item); \
+            break;                                                      \
+        }                                                               \
+        makrotemp *= makrotemp; makrotemp2 *= makrotemp2;               \
+        distance = sqrt(makrotemp + makrotemp2);                        \
     } while 0
 
 void ogs_i_recount_positions(OGS_PLIST list);
@@ -110,6 +133,8 @@ void ogs_i_recount_positions(OGS_PLIST list)
                     if ((last_distance > (ogs_item_y(temp) - ogs_item_y(temp2)) && (temp2 != temp)) || last_distance == 0) {
                         temp -> up = temp2;
                         last_distance = ogs_item_y(temp) - ogs_item_y(temp2);
+                        //ogs_distance(temp, temp2, last_distance);
+                        last_distance = ogs_item_x_lower(temp);
                     }
             temp2 = temp2 -> next;
         }
