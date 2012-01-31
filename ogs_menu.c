@@ -48,10 +48,10 @@ int main(int argc, char *argv[])
     ogs_add_button_to_window(window, 550, 50, 700, 80, "Hello, world3", pozdrav3, &arg2, 1);
     ogs_add_button_to_window(window, 550, 100, 700, 130, "Herp derp3", pridej_tlacitko, &souradnice, 1);
 
-    ogs_add_button_to_window(window, 70, 150, 220, 180, "Hello, world4", pozdrav, &arg, 1);
-    ogs_add_button_to_window(window, 240, 150, 390, 180, "Herp derp5", pozdrav2, NULL, 1);
-    ogs_add_button_to_window(window, 410, 150, 560, 180, "Hello, world25", pozdrav3, &arg2, 1);
-    ogs_add_button_to_window(window, 580, 150, 730, 180, "Herp derp25", pozdrav4, NULL, 1);
+    /* ogs_add_button_to_window(window, 70, 150, 220, 180, "Hello, world4", pozdrav, &arg, 1); */
+    /* ogs_add_button_to_window(window, 240, 150, 390, 180, "Herp derp5", pozdrav2, NULL, 1); */
+    /* ogs_add_button_to_window(window, 410, 150, 560, 180, "Hello, world25", pozdrav3, &arg2, 1); */
+    /* ogs_add_button_to_window(window, 580, 150, 730, 180, "Herp derp25", pozdrav4, NULL, 1); */
     ogs_add_button_to_window(window, 50, 200, 200, 230, "Hello, world35", pozdrav3, &arg2, 1);
     ogs_add_button_to_window(window, 300, 200, 450, 230, "Herp derp35", pridej_tlacitko, &souradnice, 1);
     

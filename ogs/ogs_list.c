@@ -9,18 +9,18 @@
 #define ogs_item_x_lower(list_item) (ogs_item_x(list_item) + ogs_item_abstract_x(list_item, size))
 #define ogs_item_y_lower(list_item) (ogs_item_y(list_item) + ogs_item_abstract_y(list_item, size))
 
-#define ogs_item_center_x(list_item) (ogs_item_x(list_item) + (ogs_item_x_lower(list_item) / 2))
-#define ogs_item_center_y(list_item) (ogs_item_y(list_item) + (ogs_item_y_lower(list_item) / 2))
+#define ogs_item_center_x(list_item) (ogs_item_x(list_item) + (ogs_item_abstract_x(list_item, size) / 2))
+#define ogs_item_center_y(list_item) (ogs_item_y(list_item) + (ogs_item_abstract_y(list_item, size) / 2))
 
 typedef enum {UL, UR, LL, LR} OGS_CORNERS; // for identifying corners (upper/lower)-(left/right)
 
 #define ogs_closest_corner(list_item, original_item) (                  \
-                                                      (ogs_item_center_x(original_item) - ogs_item_x(list_item)) < 0 ? \
-                                                      ((ogs_item_center_y(original_item) - ogs_item_y(list_item)) < 0 ? UL : LL) \
-                                                      : ((ogs_item_center_y(original_item) - ogs_item_y(list_item)) < 0 ? UR : LR))
+                                                      (ogs_item_center_x(original_item) < ogs_item_x(list_item)) ? \
+                                                      ((ogs_item_center_y(original_item) < ogs_item_y(list_item)) ? UL : LL) \
+                                                      : ((ogs_item_center_y(original_item) < ogs_item_y(list_item)) ? UR : LR))
 
 void ogs_i_recount_positions(OGS_PLIST list);
-int ogs_distance(OGS_LIST_PITEM list_item, OGS_LIST_PITEM original_item);
+float ogs_distance(OGS_LIST_PITEM list_item, OGS_LIST_PITEM original_item);
 
 int ogs_list_init(OGS_PLIST list)
 {
@@ -90,8 +90,12 @@ void ogs_i_recount_positions(OGS_PLIST list)
         /* pote se to stejne udela i pro levo, pravo a nahoru */
 
         OGS_LIST_PITEM temp2 = list -> top;
-        int last_distance = -1;
+        float last_distance = -1;
         while (temp2 != NULL) {
+            if (temp2 == temp) {
+                temp2 = temp2 -> next;
+                continue;
+            }
             if (ogs_item_y(temp2) > ogs_item_y(temp)) {
                 int distance = ogs_distance(temp2, temp);
                 if (distance < last_distance || last_distance == -1) {
@@ -105,6 +109,10 @@ void ogs_i_recount_positions(OGS_PLIST list)
         temp2 = list -> top;
         last_distance = -1;
         while (temp2 != NULL) {
+            if (temp2 == temp) {
+                temp2 = temp2 -> next;
+                continue;
+            }
             if (ogs_item_y(temp2) < ogs_item_y(temp)) {
                 int distance = ogs_distance(temp2, temp);
                 if (distance < last_distance || last_distance == -1) {
@@ -118,6 +126,10 @@ void ogs_i_recount_positions(OGS_PLIST list)
         temp2 = list -> top;
         last_distance = -1;
         while (temp2 != NULL) {
+            if (temp2 == temp) {
+                temp2 = temp2 -> next;
+                continue;
+            }
             if (ogs_item_x(temp2) < ogs_item_x(temp)) {
                 int distance = ogs_distance(temp2, temp);
                 if (distance < last_distance || last_distance == -1) {
@@ -131,6 +143,10 @@ void ogs_i_recount_positions(OGS_PLIST list)
         temp2 = list -> top;
         last_distance = -1;
         while (temp2 != NULL) {
+            if (temp2 == temp) {
+                temp2 = temp2 -> next;
+                continue;
+            }
             if (ogs_item_x(temp2) > ogs_item_x(temp)) {
                 int distance = ogs_distance(temp2, temp);
                 if (distance < last_distance || last_distance == -1) {
@@ -145,7 +161,7 @@ void ogs_i_recount_positions(OGS_PLIST list)
     }
 }
 
-int ogs_distance(OGS_LIST_PITEM list_item, OGS_LIST_PITEM original_item) { 
+float ogs_distance(OGS_LIST_PITEM list_item, OGS_LIST_PITEM original_item) { 
     int nejblizsi = ogs_closest_corner(list_item, original_item);
     int temp = 0;
     int temp2 = 0;
