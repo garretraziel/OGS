@@ -1,6 +1,6 @@
 NAME=ogs-menu
-HEADERS=defines.h ogs/ogs_fmw.h ogs/ogs_defines.h ogs/ogs_list.h ogs/ogs_objects.h ogs/ogs_draw.h ogs/ogs_input.h
-OBJFILES=ogs_menu.o ogs/ogs_fmw.o ogs/ogs_list.o ogs/ogs_objects.o ogs/ogs_draw.o ogs/ogs_input.o
+HEADERS=defines.h ogs_fmw/ogs_fmw.h ogs_fmw/ogs_defines.h ogs_fmw/ogs_list.h ogs_fmw/ogs_objects.h ogs_fmw/ogs_draw.h ogs_fmw/ogs_input.h
+OBJFILES=ogs_menu.o ogs_fmw/ogs_fmw.o ogs_fmw/ogs_list.o ogs_fmw/ogs_objects.o ogs_fmw/ogs_draw.o ogs_fmw/ogs_input.o
 
 CFLAGS=-std=c99 -Wall -Wextra -pedantic -lm
 DFLAGS=-g
