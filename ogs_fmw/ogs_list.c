@@ -15,9 +15,9 @@
 typedef enum {UL, UR, LL, LR} OGS_CORNERS; // for identifying corners (upper/lower)-(left/right)
 
 #define ogs_closest_corner(list_item, original_item) (                  \
-                                                      (ogs_item_center_x(original_item) < ogs_item_x(list_item)) ? \
-                                                      ((ogs_item_center_y(original_item) < ogs_item_y(list_item)) ? UL : LL) \
-                                                      : ((ogs_item_center_y(original_item) < ogs_item_y(list_item)) ? UR : LR))
+                                                      (ogs_item_center_x(original_item) < ogs_item_center_x(list_item)) ? \
+                                                      ((ogs_item_center_y(original_item) < ogs_item_center_y(list_item)) ? UL : LL) \
+                                                      : ((ogs_item_center_y(original_item) < ogs_item_center_y(list_item)) ? UR : LR))
 
 void ogs_i_recount_positions(OGS_PLIST list);
 float ogs_distance(OGS_LIST_PITEM list_item, OGS_LIST_PITEM original_item);
@@ -97,7 +97,7 @@ void ogs_i_recount_positions(OGS_PLIST list)
                 continue;
             }
             if (ogs_item_y(temp2) > ogs_item_y(temp)) {
-                int distance = ogs_distance(temp2, temp);
+                float distance = ogs_distance(temp2, temp);
                 if (distance < last_distance || last_distance == -1) {
                     last_distance = distance;
                     temp -> down = temp2;
@@ -114,7 +114,7 @@ void ogs_i_recount_positions(OGS_PLIST list)
                 continue;
             }
             if (ogs_item_y(temp2) < ogs_item_y(temp)) {
-                int distance = ogs_distance(temp2, temp);
+                float distance = ogs_distance(temp2, temp);
                 if (distance < last_distance || last_distance == -1) {
                     last_distance = distance;
                     temp -> up = temp2;
@@ -131,7 +131,7 @@ void ogs_i_recount_positions(OGS_PLIST list)
                 continue;
             }
             if (ogs_item_x(temp2) < ogs_item_x(temp)) {
-                int distance = ogs_distance(temp2, temp);
+                float distance = ogs_distance(temp2, temp);
                 if (distance < last_distance || last_distance == -1) {
                     last_distance = distance;
                     temp -> left = temp2;
@@ -148,7 +148,7 @@ void ogs_i_recount_positions(OGS_PLIST list)
                 continue;
             }
             if (ogs_item_x(temp2) > ogs_item_x(temp)) {
-                int distance = ogs_distance(temp2, temp);
+                float distance = ogs_distance(temp2, temp);
                 if (distance < last_distance || last_distance == -1) {
                     last_distance = distance;
                     temp -> right = temp2;
