@@ -25,13 +25,21 @@ int main()
         rectangleRGBA(screen, 100+i,100+i, 500-i, 500-i, 0x00,0x00,0x00,0xdd-(rand()%3));
     }
 
-    /* for (int i = 0; i<10; i++) { */
-    /*     rectangleRGBA(screen,102+i,102+i,498-i,498-i,0x00,0x00,0x00,0xaa); */
-    /* } */
+    for (int i = 0; i<30; i++) {
+        lineColor(screen, 100+i, 100, 100+i, 500, 0x00000096 -(5*i));
+    }
 
-    /* for (int i = 0; i<30; i++) { */
-    /*     rectangleRGBA(screen,102+i+rand()%2,102+i+rand()%2,498-i-rand()%2,498-i-rand()%2,0x00,0x00,0x00,abs(0x5a-(3*i+rand()%2))); */
-    /* } */
+    for (int i = 0; i<30; i++) {
+        lineColor(screen, 100,100+i,500, 100+i, 0x00000096 -(5*i));
+    }
+
+    for (int i = 0; i<30; i++) {
+        lineColor(screen, 100, 500-i,500, 500-i, 0x00000096 -(5*i));
+    }
+
+    for (int i = 0; i<30; i++) {
+        lineColor(screen, 500-i,100,500-i, 500, 0x00000096 -(5*i));
+    }
     
     SDL_Flip(screen);
 
